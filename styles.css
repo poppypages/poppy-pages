@@ -1201,7 +1201,7 @@ footer {
 @media (min-width: 900px) {
     #lead-form-step-1 {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 15px;
         align-items: end;
     }
@@ -1216,6 +1216,15 @@ footer {
     #lead-form-step-1 .form-group {
         margin-bottom: 0;
         width: 100%;
+    }
+
+    /* Button takes a full new row and is centered */
+    #lead-form-step-1 button {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: auto;
+        min-width: 300px;
+        margin-top: 10px;
     }
 
     /* Privacy Text spans full width */

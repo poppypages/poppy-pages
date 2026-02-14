@@ -136,11 +136,16 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSteps();
     }
 
-    // 3. SMOOTH SCROLLING (Fixed for Header CTA)
+    // 3. SMOOTH SCROLLING
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if (targetId === '#' || targetId === '#pricing' || targetId === '#about') return;
+
+            // Prevent default if it's just a placeholder link
+            if (targetId === '#') {
+                e.preventDefault();
+                return;
+            }
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {

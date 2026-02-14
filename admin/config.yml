@@ -1,0 +1,23 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+media_folder: "assets/images/uploads" # Media files will be stored in the repo under this path
+public_folder: "assets/images/uploads" # The src attribute for uploaded media will begin with /assets/images/uploads
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "string", default: "PoppyPages Team"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Excerpt", name: "description", widget: "text", hint: "Short summary for search engines and social media"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "LLM Summary", name: "llm_summary", widget: "text", hint: "A concise summary optimized for AI models to understand the key takeaways", required: false}
+      - {label: "Schema Type", name: "schema_type", widget: "select", options: ["BlogPosting", "Article", "NewsArticle"], default: "BlogPosting"}

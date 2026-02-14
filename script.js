@@ -1,14 +1,21 @@
-
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg5p1Yh7RhuhY8VEJyzgbBEQW73F5C8csxZqqIJ_DqWexlH44jkpjc-Vk_gTvYwPPY9g/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. ADMIN SECURITY (Simple)
+    if (window.location.pathname.includes('admin')) {
+        const pass = prompt("Enter Admin Password:");
+        if (pass !== "poppyadmin2026") {
+            alert("Unauthorized");
+            window.location.href = "index";
+        }
+    }
+
     // 1. LEAD FORM STEP 1 (Homepage)
     const formStep1 = document.getElementById('lead-form-step-1');
     if (formStep1) {
         formStep1.addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = formStep1.querySelector('button');
-            const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Processing...';
             submitBtn.disabled = true;
 
@@ -20,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Initial submission to capture Name/Email immediately
             try {
-                await submitToGoogle({ ...data, partial: true });
+                await submitToGoogle({ ...data, action: 'submitLead', partial: true });
             } catch (err) { console.error('Initial sub failed', err); }
 
             // Clean URL Redirect
@@ -35,13 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextBtn = document.getElementById('next-btn');
         const prevBtn = document.getElementById('prev-btn');
         const submitBtn = document.getElementById('submit-btn');
-        const indicator = document.getElementById('step-indicator');
+        const progressBar = document.getElementById('progress-bar');
         let currentStep = 0;
 
         const updateSteps = () => {
             steps.forEach((step, index) => {
                 step.classList.toggle('active', index === currentStep);
             });
+
+            // Nonlinear progress bar (Fast start, slower end)
+            // Steps: 0, 1, 2, 3, 4, 5, 6
+            const progressMap = [15, 35, 55, 70, 82, 92, 100];
+            progressBar.style.width = `${progressMap[currentStep]}%`;
 
             // Buttons visibility
             prevBtn.style.display = currentStep === 0 ? 'none' : 'block';
@@ -52,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextBtn.style.display = 'block';
                 submitBtn.style.display = 'none';
             }
-
-            // Indicator
-            indicator.textContent = `Question ${currentStep + 1} of ${steps.length}`;
 
             // Focus first input/select in step
             const firstInput = steps[currentStep].querySelector('input, select');
@@ -77,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Partial submission on every "Next" click
             const partialData = Object.fromEntries(new FormData(formStep2).entries());
             const step1Data = JSON.parse(localStorage.getItem('poppypages_lead') || '{}');
-            await submitToGoogle({ ...step1Data, ...partialData, partial: true, currentStep: currentStep + 1 });
+            await submitToGoogle({ ...step1Data, ...partialData, action: 'submitLead', partial: true, currentStep: currentStep + 1 });
 
             if (currentStep < steps.length - 1) {
                 currentStep++;
@@ -113,14 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const finalData = Object.fromEntries(new FormData(formStep2).entries());
             const step1Data = JSON.parse(localStorage.getItem('poppypages_lead') || '{}');
-            const payload = { ...step1Data, ...finalData, partial: false };
+            const payload = { ...step1Data, ...finalData, action: 'submitLead', partial: false };
 
             try {
                 await submitToGoogle(payload);
                 localStorage.removeItem('poppypages_lead');
                 window.location.href = 'thank-u';
             } catch (error) {
-                console.error('Final submission error:', error);
                 window.location.href = 'thank-u'; // Redirect anyway for UX
             }
         });
@@ -132,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#' || targetId === '#pricing' || targetId === '#about') return;
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {

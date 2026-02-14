@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/free-pack", "destination": "/audit" },
+    { "source": "/thank-u", "destination": "/thank-you" }
+  ]
+}

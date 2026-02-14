@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoppyPages Admin | Blog Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body style="background: #f8fafc;">
+    <div class="container" style="padding: 60px 20px;">
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; padding: 40px;">
+            <h1 class="gradient-text">Blog Admin</h1>
+            <p>Manage your posts here. Changes are saved directly to Google Sheets.</p>
+
+            <hr style="margin: 30px 0; opacity: 0.1;">
+
+            <form id="add-post-form">
+                <input type="hidden" name="action" value="addPost">
+                <div class="form-group">
+                    <label>Post Title</label>
+                    <input type="text" name="title" placeholder="e.g. 5 Ways to Build Trust Faster" required>
+                </div>
+                <div class="form-group">
+                    <label>Excerpt (Short summary for listing)</label>
+                    <input type="text" name="excerpt" placeholder="A brief hook for the blog list..." required>
+                </div>
+                <div class="form-group">
+                    <label>Content (Plain text or HTML)</label>
+                    <textarea name="content"
+                        style="width: 100%; min-height: 300px; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;"
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">Publish Post</button>
+            </form>
+
+            <div id="status-msg" style="margin-top: 20px; text-align: center; font-weight: 600;"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="blog" class="btn btn-secondary btn-sm">View Blog Listing</a>
+        </div>
+    </div>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
+
+        document.getElementById('add-post-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const status = document.getElementById('status-msg');
+
+            btn.textContent = 'Publishing...';
+            btn.disabled = true;
+
+            const formData = new FormData(e.target);
+            const params = new URLSearchParams(formData);
+
+            try {
+                // Post to Google Apps Script
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: params
+                });
+
+                status.style.color = 'green';
+                status.textContent = 'Success! Post published. (It may take a minute to appear on the blog due to caching).';
+                e.target.reset();
+            } catch (err) {
+                status.style.color = 'red';
+                status.textContent = 'Error publishing post. Check console.';
+                console.error(err);
+            } finally {
+                btn.textContent = 'Publish Post';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

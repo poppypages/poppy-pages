@@ -40,96 +40,102 @@
             <p class="subheadline">Tell us a bit about your business so we can tailor the audit specifically for you.
             </p>
 
-            <div class="hero-form-container glass-card" style="max-width: 800px; padding: 50px;">
-                <!-- Note: Reusing glass-card but inline style overrides for specific audit feel requested "Big & Simple" -->
-                <form id="lead-form-step-2" class="lead-form compact-form">
-                    <!-- 1. Goal -->
-                    <div class="form-group">
-                        <label for="goal">What is your #1 goal for the next 90 days?</label>
-                        <select id="goal" name="goal" required>
-                            <option value="" disabled selected>Select your goal...</option>
-                            <option value="brand_awareness">Increase Brand Awareness</option>
-                            <option value="lead_generation">Generate More Leads</option>
-                            <option value="customer_retention">Engage Existing Customers</option>
-                            <option value="hiring">Recruit Talent</option>
-                        </select>
+            <div class="hero-form-container glass-card" style="max-width: 600px; padding: 40px;">
+                <form id="lead-form-step-2" class="lead-form">
+                    <!-- Progress Indicator -->
+                    <div id="step-indicator" class="step-indicator">Question 1 of 7</div>
+
+                    <!-- Step 1: Goal -->
+                    <div class="form-step active" data-step="1">
+                        <div class="form-group">
+                            <label for="goal">What is your #1 goal for the next 90 days?</label>
+                            <select id="goal" name="goal">
+                                <option value="" disabled selected>Select your goal...</option>
+                                <option value="brand_awareness">Increase Brand Awareness</option>
+                                <option value="lead_generation">Generate More Leads</option>
+                                <option value="customer_retention">Engage Existing Customers</option>
+                                <option value="hiring">Recruit Talent</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- 2. Target Customer -->
-                    <div class="form-group">
-                        <label for="target_customer">Describe your ideal customer in one sentence.</label>
-                        <input type="text" id="target_customer" name="target_customer"
-                            placeholder="e.g. Busy moms in Raleigh looking for pediatric care." required>
+                    <!-- Step 2: Target Customer -->
+                    <div class="form-step" data-step="2">
+                        <div class="form-group">
+                            <label for="target_customer">Describe your ideal customer in one sentence.</label>
+                            <input type="text" id="target_customer" name="target_customer"
+                                placeholder="e.g. Busy moms in Raleigh looking for pediatric care.">
+                        </div>
                     </div>
 
-                    <!-- 3. Frustration -->
-                    <div class="form-group">
-                        <label for="frustration">What is your biggest frustration with social media right now?</label>
-                        <select id="frustration" name="frustration" required>
-                            <option value="" disabled selected>Select biggest challenge...</option>
-                            <option value="inconsistency">Inconsistency (We post sporadically)</option>
-                            <option value="no_time">No Time (We are too busy)</option>
-                            <option value="no_results">No Results (We post but get nothing)</option>
-                            <option value="content_ideas">Content Ideas (Don't know what to post)</option>
-                        </select>
+                    <!-- Step 3: Frustration -->
+                    <div class="form-step" data-step="3">
+                        <div class="form-group">
+                            <label for="frustration">What is your biggest frustration with social media right
+                                now?</label>
+                            <select id="frustration" name="frustration">
+                                <option value="" disabled selected>Select biggest challenge...</option>
+                                <option value="inconsistency">Inconsistency (We post sporadically)</option>
+                                <option value="no_time">No Time (We are too busy)</option>
+                                <option value="no_results">No Results (We post but get nothing)</option>
+                                <option value="content_ideas">Content Ideas (Don't know what to post)</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- 4. Competitor -->
-                    <div class="form-group">
-                        <label for="competitor">Link to a competitor whose presence you admire (Optional).</label>
-                        <input type="text" id="competitor" name="competitor" placeholder="e.g. competitor.com">
+                    <!-- Step 4: Competitor -->
+                    <div class="form-step" data-step="4">
+                        <div class="form-group">
+                            <label for="competitor">Link to a competitor whose presence you admire (Optional).</label>
+                            <input type="text" id="competitor" name="competitor" placeholder="e.g. competitor.com">
+                        </div>
                     </div>
 
-                    <!-- 5. Bandwidth -->
-                    <div class="form-group">
-                        <label for="bandwidth">How much time can you spend reviewing content per week?</label>
-                        <select id="bandwidth" name="bandwidth" required>
-                            <option value="0_1_hour">0-1 Hour (I need it done for me)</option>
-                            <option value="2_4_hours">2-4 Hours (I can collaborate)</option>
-                            <option value="5_plus">5+ Hours (I want to be hands-on)</option>
-                        </select>
+                    <!-- Step 5: Budget -->
+                    <div class="form-step" data-step="5">
+                        <div class="form-group">
+                            <label for="budget">What is your monthly marketing budget?</label>
+                            <select id="budget" name="budget">
+                                <option value="under_500">Under $500</option>
+                                <option value="500_1500">$500 - $1,500</option>
+                                <option value="1500_3000">$1,500 - $3,000</option>
+                                <option value="3000_plus">$3,000+</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- 6. Assets -->
-                    <div class="form-group">
-                        <label for="assets">Do you have existing brand photos/logos?</label>
-                        <select id="assets" name="assets" required>
-                            <option value="yes_plenty">Yes, we have a full library</option>
-                            <option value="some">We have some, but they are old</option>
-                            <option value="no">No, we need help creating them</option>
-                        </select>
+                    <!-- Step 6: Website URL -->
+                    <div class="form-step" data-step="6">
+                        <div class="form-group">
+                            <label for="website">Website URL (for the audit)</label>
+                            <input type="text" id="website" name="website" placeholder="e.g. www.yourbusiness.com">
+                        </div>
                     </div>
 
-                    <!-- 7. Budget -->
-                    <div class="form-group">
-                        <label for="budget">What is your monthly marketing budget?</label>
-                        <select id="budget" name="budget" required>
-                            <option value="under_500">Under $500</option>
-                            <option value="500_1500">$500 - $1,500</option>
-                            <option value="1500_3000">$1,500 - $3,000</option>
-                            <option value="3000_plus">$3,000+</option>
-                        </select>
+                    <!-- Step 7: Social Handles -->
+                    <div class="form-step" data-step="7">
+                        <div class="form-group">
+                            <label for="socials">Social Handles</label>
+                            <input type="text" id="socials" name="socials" placeholder="@handle">
+                        </div>
                     </div>
 
-                    <input type="hidden" name="website" id="hidden_website">
-                    <!-- Will auto-fill if we moved it or just ask again if simpler. Let's keep it simple and maybe remove if redundant, but user asked for 5-7 q's. I'll add website as a text field if it was critical, but the previous flow asked for it. Ah, I'm replacing the whole form. I should re-add standard fields if needed, but the prompt was specific about the 5-7 questions. I'll stick to the specific questions requested + the website URL as it's critical for an audit. -->
-
-                    <div class="form-group">
-                        <label for="website">Website URL (for the audit)</label>
-                        <input type="text" id="website" name="website" placeholder="e.g. www.yourbusiness.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="socials">Social Handles</label>
-                        <input type="text" id="socials" name="socials" placeholder="@handle">
-                    </div>
                     <!-- Honeypot Trap -->
                     <div class="hp-trap">
                         <label for="hp_field">Ignore this field</label>
                         <input type="text" name="hp_field" id="hp_field" tabindex="-1" autocomplete="off">
                     </div>
 
-                    <button type="submit" class="btn btn-primary full-width"
-                        style="font-size: 1.2rem; padding: 20px;">Complete & Get My Pack</button>
+                    <div style="margin-top: 30px; display: flex; gap: 10px;">
+                        <button type="button" id="prev-btn" class="btn btn-secondary"
+                            style="display:none;">Back</button>
+                        <button type="button" id="next-btn" class="btn btn-primary full-width">Next Question</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary full-width"
+                            style="display:none;">Complete Audit</button>
+                    </div>
+
+                    <p class="privacy center-text" style="margin-top: 20px;">“No spam. No obligation. We use this to
+                        customize your audit.”</p>
                 </form>
             </div>
         </div>

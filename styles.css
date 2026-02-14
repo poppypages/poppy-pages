@@ -147,6 +147,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
+    /* Reduced from 20px */
 }
 
 .nav-container.centered-nav {
@@ -998,8 +1000,6 @@ footer {
 }
 
 .bonus-list li {
-    display: flex;
-    gap: 15px;
     margin-bottom: 20px;
     align-items: flex-start;
 }
@@ -1727,22 +1727,169 @@ h2,
 
 /* Audit & Thank You Tightening */
 .audit-container {
-    padding-top: 40px !important;
+    padding-top: 20px !important;
+    /* Reduced from 40px */
 }
 
 .hero-section.audit-hero {
-    padding-top: 60px !important;
+    padding-top: 40px !important;
+    /* Reduced from 60px */
     min-height: auto;
 }
 
 .success-section {
-    padding-top: 60px !important;
+    padding-top: 40px !important;
+    /* Reduced from 60px */
 }
 
 .hero-badge {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    /* Reduced from 20px */
 }
 
 .hero-form-container.glass-card {
-    margin-top: 30px;
+    margin-top: 20px;
+    /* Reduced from 30px */
+}
+
+/* Testimonial Styles */
+.testimonial-small {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    box-shadow: var(--shadow-sm);
+    max-width: fit-content;
+}
+
+.testimonial-small.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.headshot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e1e1e1;
+}
+
+.testimonial-attribution {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--primary);
+    margin-left: 5px;
+}
+
+/* Benefit Blocks */
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    padding: 40px;
+    text-align: left;
+}
+
+.benefit-card h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Multi-step Form Animations */
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeInSlide 0.4s ease-out;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-indicator {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Blog Layout */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 100px;
+}
+
+.blog-card {
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-content {
+    padding: 25px;
+}
+
+.blog-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.blog-title {
+    margin: 10px 0;
+    font-size: 1.4rem;
+}
+
+/* Success Steps */
+.success-steps {
+    text-align: left;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.success-step {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.step-number {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
 }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoppyPages | Growth Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <header class="glass-header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index" class="logo-container">
+                    <img src="assets/logo_final.png" alt="PoppyPages Logo" class="brand-logo-img">
+                </a>
+                <div class="nav-links">
+                    <a href="index#about">About us</a>
+                    <a href="blog" class="active">Blog</a>
+                    <a href="index#leads" class="btn btn-sm btn-primary">Free Audit + Growth Pack</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 120px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 60px;">
+            <h1 class="gradient-text" style="font-size: 3.5rem;">Growth Blog</h1>
+            <p class="subheadline" style="max-width: 600px; margin-left: 0;">Insights on brand building, social
+                strategy, and making your business look as professional as it actually is.</p>
+        </div>
+
+        <div id="blog-posts" class="blog-grid">
+            <!-- Loading State -->
+            <div class="glass-card blog-card">
+                <div class="blog-content">
+                    <p>Loading the latest insights...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container center-text">
+            <p class="copyright">© 2026 PoppyPages. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
+
+        async function fetchPosts() {
+            try {
+                // We fetch from the Google Apps Script with action=getPosts
+                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=getPosts`);
+                const posts = await response.json();
+                renderPosts(posts);
+            } catch (err) {
+                console.error("Error fetching posts:", err);
+                document.getElementById('blog-posts').innerHTML = '<p>Check back soon for new posts!</p>';
+            }
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('blog-posts');
+            if (!posts || posts.length === 0) {
+                container.innerHTML = '<p>No posts yet. Stay tuned!</p>';
+                return;
+            }
+
+            container.innerHTML = posts.map(post => `
+                <article class="glass-card blog-card">
+                    <div class="blog-content">
+                        <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
+                        <h2 class="blog-title">${post.title}</h2>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <a href="post?id=${post.id}" class="gradient-text" style="font-weight: 700; display: inline-block; margin-top: 15px;">Read More →</a>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        fetchPosts();
+    </script>
+</body>
+
+</html>

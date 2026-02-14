@@ -1,0 +1,11 @@
+{
+    "name": "poppypages-site",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "echo 'No start script' && exit 0"
+    },
+    "dependencies": {
+        "simple-oauth2": "^4.3.0",
+        "randomstring": "^1.2.3"
+    }
+}

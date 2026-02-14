@@ -1200,25 +1200,28 @@ footer {
 /* Horizontal Hero Form (Desktop) */
 @media (min-width: 900px) {
     #lead-form-step-1 {
-        display: flex;
-        align-items: flex-end;
-        /* Align inputs with button */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 15px;
+        align-items: end;
     }
+
+    .form-row {
+        display: contents;
+        /* Unwrap the name/email div so they become grid items */
+    }
+
+    /* Name (Item 1), Email (Item 2), Phone (Item 3), Button (Item 4) */
 
     #lead-form-step-1 .form-group {
-        flex: 1;
         margin-bottom: 0;
-        /* Remove margin in flex row */
+        width: 100%;
     }
 
-    #lead-form-step-1 button {
-        flex: 0 0 auto;
-        /* Button shouldn't shrink */
-        width: auto;
-        padding-left: 30px;
-        padding-right: 30px;
-        white-space: nowrap;
+    /* Privacy Text spans full width */
+    .privacy {
+        grid-column: 1 / -1;
+        margin-top: 10px;
     }
 }
 

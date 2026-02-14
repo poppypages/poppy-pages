@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoppyPages | Blog Post</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
@@ -47,18 +48,16 @@
     </footer>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
-
         async function fetchPost() {
             const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('id');
-            if (!postId) {
+            const slug = urlParams.get('slug');
+            if (!slug) {
                 window.location.href = 'blog';
                 return;
             }
 
             try {
-                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=getPost&id=${postId}`);
+                const response = await fetch(`/api/post?slug=${slug}`);
                 const post = await response.json();
                 renderPost(post);
             } catch (err) {
@@ -68,17 +67,18 @@
         }
 
         function renderPost(post) {
-            if (!post) {
+            if (!post || post.error) {
                 document.getElementById('post-content').innerHTML = '<h1>Post not found</h1>';
                 return;
             }
 
             document.title = `PoppyPages | ${post.title}`;
             document.getElementById('post-content').innerHTML = `
+                ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px; margin-bottom: 30px;">` : ''}
                 <span class="blog-date" style="display:block; margin-bottom: 20px;">${new Date(post.date).toLocaleDateString()}</span>
                 <h1 class="gradient-text" style="font-size: 3rem; margin-bottom: 30px;">${post.title}</h1>
                 <div class="post-body" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
-                    ${post.content.split('\n').map(p => p.trim() ? `<p style="margin-bottom: 20px;">${p}</p>` : '').join('')}
+                    ${post.content}
                 </div>
             `;
         }

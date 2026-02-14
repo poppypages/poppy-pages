@@ -19,39 +19,42 @@ module.exports = async (req, res) => {
     try {
         const accessToken = await client.getToken({
             code,
-            redirect_uri: `https://${host}/api/callback`, // Uses /api/callback
+            redirect_uri: `https://${host}/api/callback`,
         });
 
-        // Extract token correctly depending on simple-oauth2 version structure
-        const token = accessToken.token.access_token || accessToken.token;
+        const token = accessToken.token.access_token;
 
         // Handshake script for Decap CMS
-        const script = `
+        const responseBody = `
     <html>
-      <head>
+      <body>
         <script>
-        function receiveMessage(e) {
-          console.log("receiveMessage %o", e)
-          // send message to main window with url
-          window.opener.postMessage(
-            'authorization:github:success:${JSON.stringify({
-            token: "${token}",
-            provider: "github"
-        })}',
-            e.origin
-          )
-        }
-        window.addEventListener("message", receiveMessage, false)
-        // Start handshake with parent
-        console.log("Sending message: %o", "github")
-        window.opener.postMessage("authorizing:github", "*")
+          (function() {
+            var token = "${token}";
+            var provider = "github";
+            
+            function receiveMessage(e) {
+              console.log("receiveMessage %o", e);
+              // Send message to parent window with the token
+              window.opener.postMessage(
+                'authorization:github:success:' + JSON.stringify({
+                  token: token,
+                  provider: provider
+                }),
+                e.origin
+              );
+            }
+            
+            window.addEventListener("message", receiveMessage, false);
+            // Start the handshake
+            window.opener.postMessage("authorizing:github", "*");
+          })();
         </script>
-      </head>
-      <body>Success! Authenticated. Closing...</body>
+      </body>
     </html>
     `;
 
-        res.status(200).send(script);
+        res.status(200).send(responseBody);
     } catch (error) {
         console.error('Access Token Error', error.message);
         res.status(500).json('Authentication failed');

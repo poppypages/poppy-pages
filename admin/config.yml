@@ -1,7 +1,6 @@
 backend:
   name: github
-  repo: poppypages/poppy-pages
-  branch: main
+  repo: "poppypages/poppy-pages"
   base_url: https://www.poppypages.com
   auth_endpoint: api/auth
 

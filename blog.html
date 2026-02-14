@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoppyPages | Growth Blog</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
@@ -54,12 +55,9 @@
     </footer>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
-
         async function fetchPosts() {
             try {
-                // We fetch from the Google Apps Script with action=getPosts
-                const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=getPosts`);
+                const response = await fetch('/api/posts');
                 const posts = await response.json();
                 renderPosts(posts);
             } catch (err) {
@@ -77,11 +75,12 @@
 
             container.innerHTML = posts.map(post => `
                 <article class="glass-card blog-card">
+                    ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px 15px 0 0;">` : ''}
                     <div class="blog-content">
                         <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
                         <h2 class="blog-title">${post.title}</h2>
-                        <p class="blog-excerpt">${post.excerpt}</p>
-                        <a href="post?id=${post.id}" class="gradient-text" style="font-weight: 700; display: inline-block; margin-top: 15px;">Read More →</a>
+                        <p class="blog-excerpt">${post.description || post.excerpt || ''}</p>
+                        <a href="post?slug=${post.slug}" class="gradient-text" style="font-weight: 700; display: inline-block; margin-top: 15px;">Read More →</a>
                     </div>
                 </article>
             `).join('');

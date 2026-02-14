@@ -1978,3 +1978,47 @@ h2,
     font-weight: 800;
     flex-shrink: 0;
 }
+/* --- BLOG POST STYLES --- */
+.post-body h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.2rem;
+    margin: 40px 0 20px;
+    color: var(--text-main);
+}
+
+.post-body h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    margin: 30px 0 15px;
+    color: var(--text-main);
+}
+
+.post-body p {
+    margin-bottom: 24px;
+    line-height: 1.8;
+}
+
+.post-body ul, .post-body ol {
+    margin: 20px 0 30px 20px;
+}
+
+.post-body li {
+    margin-bottom: 12px;
+}
+
+.post-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin: 30px 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.post-body blockquote {
+    border-left: 4px solid var(--primary);
+    padding: 10px 30px;
+    margin: 30px 0;
+    font-style: italic;
+    background: rgba(255, 127, 80, 0.05);
+    border-radius: 0 15px 15px 0;
+}

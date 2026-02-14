@@ -21,6 +21,11 @@
 
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --primary-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+.center-text {
+    text-align: center;
 }
 
 * {
@@ -1120,16 +1125,17 @@ footer {
 }
 
 .hero-section {
-    padding: 180px 0 140px;
-    /* Massive spacing */
-    min-height: 100vh;
+    padding: 120px 0 80px;
+    /* Reduced from 180px/140px */
+    min-height: auto;
+    /* Remove 100vh constraint to fix "above fold" */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; Removed to prevent scroll glitch perception */
 }
 
 .hero-layout {

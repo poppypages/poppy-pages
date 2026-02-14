@@ -44,7 +44,16 @@
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg5p1Yh7RhuhY8VEJyzgbBEQW73F5C8csxZqqIJ_DqWexlH44jkpjc-Vk_gTvYwPPY9g/exec';
+
+        // Security Check
+        (function () {
+            const pass = prompt("Enter Admin Password:");
+            if (pass !== "poppyadmin2026") {
+                alert("Unauthorized");
+                window.location.href = "index";
+            }
+        })();
 
         document.getElementById('add-post-form').addEventListener('submit', async (e) => {
             e.preventDefault();

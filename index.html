@@ -55,19 +55,25 @@
             <div class="hero-form-container glass-card">
                 <h3>Get My Free Audit + Growth Pack</h3>
                 <form id="lead-form-step-1" class="lead-form">
-                    <div class="form-group">
-                        <label for="name" class="sr-only">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="name" class="sr-only">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required
+                                style="width: 100%;">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Work Email" required
+                                style="width: 100%;">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email" class="sr-only">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Work Email" required>
-                    </div>
+
                     <!-- Honeypot Trap -->
                     <div class="hp-trap">
                         <label for="hp_field">Ignore this field</label>
                         <input type="text" name="hp_field" id="hp_field" tabindex="-1" autocomplete="off">
                     </div>
+
                     <button type="submit" class="btn btn-primary full-width pulse-main">Get the Free Growth
                         Pack</button>
                     <p class="privacy center-text">No spam. No obligation. We use this to customize your audit.</p>
@@ -105,13 +111,16 @@
                 <div class="benefit-card glass-card">
                     <h3>We Deliver Detail</h3>
                     <p>“Nothing missed. Every important detail captured.”</p>
+                </div>
+            </div>
 
-                    <!-- Testimonial #2 -->
-                    <div class="testimonial-small" style="margin-top:20px; background: rgba(var(--primary-rgb), 0.05);">
-                        <p>“Very detailed. It had everything — all those little important things that were important to
-                            me showed up.” <span class="testimonial-attribution">– Miniimah S. Purposely Organized
-                                LLC.</span></p>
-                    </div>
+            <!-- Testimonial row pulled out for consistency -->
+            <div class="testimonial-row">
+                <div class="testimonial-small"
+                    style="background: rgba(var(--primary-rgb), 0.05); border: 1px solid rgba(var(--primary-rgb), 0.1);">
+                    <p>“Very detailed. It had everything — all those little important things that were important to me
+                        showed up.” <span class="testimonial-attribution">– Miniimah S. Purposely Organized LLC.</span>
+                    </p>
                 </div>
             </div>
         </div>

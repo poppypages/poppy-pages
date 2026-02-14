@@ -2,7 +2,7 @@ backend:
   name: github
   repo: poppypages/poppy-pages
   branch: main
-  base_url: https://poppypages-cms-autho.vercel.app # The deployed OAuth bridge
+  base_url: https://poppypages-cms-auth-v2.vercel.app # Updated OAuth Bridge URL
 
 media_folder: "assets/images/uploads" # Media files will be stored in the repo under this path
 public_folder: "assets/images/uploads" # The src attribute for uploaded media will begin with /assets/images/uploads

@@ -16,8 +16,9 @@ const config = {
 const client = new AuthorizationCode(config);
 
 module.exports = (req, res) => {
+    const host = req.headers.host; // Use the actual host (e.g., www.poppypages.com)
     const authorizationUri = client.authorizeURL({
-        redirect_uri: `https://${process.env.VERCEL_URL}/api/callback`, // Dynamic Vercel URL
+        redirect_uri: `https://${host}/api/callback`,
         scope: 'repo,user',
         state: randomstring.generate(32)
     });

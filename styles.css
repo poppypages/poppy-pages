@@ -468,6 +468,10 @@ nav {
     padding: 100px 0;
 }
 
+.pricing-grid {
+    margin-bottom: 60px;
+}
+
 .pricing-card {
     max-width: 450px;
     margin: 0 auto;
@@ -1206,7 +1210,7 @@ footer {
         align-items: end;
     }
 
-    .form-row {
+    #lead-form-step-1 .form-row {
         display: contents;
         /* Unwrap the name/email div so they become grid items */
     }
@@ -1950,7 +1954,8 @@ h2,
 
 .blog-title {
     margin: 10px 0;
-    font-size: 1.4rem;
+    font-size: 1.4rem !important;
+    letter-spacing: -0.5px;
 }
 
 /* Success Steps */

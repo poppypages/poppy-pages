@@ -612,8 +612,25 @@ footer {
     margin-bottom: 8px;
 }
 
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.footer-nav a {
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: var(--primary);
+}
+
 .copyright {
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
@@ -2026,4 +2043,29 @@ h2,
     font-style: italic;
     background: rgba(255, 127, 80, 0.05);
     border-radius: 0 15px 15px 0;
+}
+
+/* Active nav link */
+.nav-links a.active:not(.btn) {
+    color: var(--primary);
+}
+
+/* Contact page responsive */
+@media (max-width: 900px) {
+    [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Popular badge */
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
 }

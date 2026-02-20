@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoppyPages | Blog Post</title>
+    <meta name="description" content="Read the latest social media tips and brand building strategies from PoppyPages.">
+
+    <meta property="og:title" content="PoppyPages Blog">
+    <meta property="og:description" content="Social media tips and brand building strategies for small businesses.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://poppypages.com/assets/og-image.png">
+    <meta property="og:site_name" content="PoppyPages">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link
@@ -23,8 +32,10 @@
                     <img src="assets/logo_final.png" alt="PoppyPages Logo" class="brand-logo-img">
                 </a>
                 <div class="nav-links">
-                    <a href="index#about">About us</a>
+                    <a href="about">About</a>
+                    <a href="services">Services</a>
                     <a href="blog">Blog</a>
+                    <a href="contact">Contact</a>
                     <a href="index#leads" class="btn btn-sm btn-primary">Free Audit + Growth Pack</a>
                 </div>
             </nav>
@@ -41,8 +52,25 @@
         </div>
     </main>
 
+    <!-- Post CTA -->
+    <section class="final-cta-section glass-section">
+        <div class="container">
+            <h2>Want This Handled For You?</h2>
+            <p>Get a free social media audit and see exactly where your online presence stands — no obligation.</p>
+            <div class="cta-group">
+                <a href="index#leads" class="btn btn-primary pulse-main">Get the Free Growth Pack</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container center-text">
+            <div class="footer-nav">
+                <a href="about">About</a>
+                <a href="services">Services</a>
+                <a href="blog">Blog</a>
+                <a href="contact">Contact</a>
+            </div>
             <p class="copyright">© 2026 PoppyPages. All rights reserved.</p>
         </div>
     </footer>
@@ -72,7 +100,18 @@
                 return;
             }
 
-            document.title = `PoppyPages | ${post.title}`;
+            document.title = `${post.title} | PoppyPages`;
+            // Update meta tags dynamically for social sharing
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.content = post.description || post.excerpt || '';
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.content = post.title;
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.content = post.description || post.excerpt || '';
+            if (post.thumbnail) {
+                const ogImg = document.querySelector('meta[property="og:image"]');
+                if (ogImg) ogImg.content = post.thumbnail;
+            }
             document.getElementById('post-content').innerHTML = `
                 ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px; margin-bottom: 30px;">` : ''}
                 <span class="blog-date" style="display:block; margin-bottom: 20px;">${new Date(post.date).toLocaleDateString()}</span>

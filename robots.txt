@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /free-pack
+Disallow: /thank-u
+
+Sitemap: https://poppypages.com/sitemap.xml

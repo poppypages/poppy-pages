@@ -4,7 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PoppyPages | Free Social Media Audit & Post Pack</title>
+    <title>PoppyPages | Social Media Management for Small Business</title>
+    <meta name="description" content="PoppyPages helps small businesses look active, professional, and trusted online. Get a free social media audit, post pack, and 30-day content calendar.">
+    <link rel="canonical" href="https://poppypages.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PoppyPages | Social Media Management for Small Business">
+    <meta property="og:description" content="We manage your social media so you look active and professional — without doing any of the work. Get a free audit and growth pack.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poppypages.com/">
+    <meta property="og:image" content="https://poppypages.com/assets/og-image.png">
+    <meta property="og:site_name" content="PoppyPages">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PoppyPages | Social Media Management for Small Business">
+    <meta name="twitter:description" content="We manage your social media so you look active and professional — without doing any of the work.">
+    <meta name="twitter:image" content="https://poppypages.com/assets/og-image.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +29,87 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
+
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "PoppyPages",
+        "url": "https://poppypages.com",
+        "logo": "https://poppypages.com/assets/logo_final.png",
+        "description": "Social media management for small businesses. We help you look active, professional, and trusted online.",
+        "sameAs": [
+            "https://www.linkedin.com/company/poppypages"
+        ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Will the posts look like they came from us?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. The Post Pack includes professional templates that match modern standards. If you hire us for the Growth plan, we customize everything to your brand voice and style."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much time does my team need to spend on this?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Zero to 30 minutes a month. The free pack is ready to use. Our paid plans are completely done-for-you — we just need your approval on the calendar."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is this safe? What if we get negative comments?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We monitor your Google Reviews and social comments. We alert you immediately to any risks and provide a draft response to neutralize the issue professionally."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "We've tried social media agencies before.",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most agencies focus on going viral. We focus on building trust. We aren't trying to make you an influencer; we're ensuring your business looks actively open for business."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How often should a small business post on social media?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For most small businesses, 3-4 posts per week is the sweet spot. Enough to stay visible and active, without burning out. Consistency matters more than volume — a steady 3 posts per week beats 10 posts one week and silence the next."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What platforms do you post on?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We work with Instagram, Facebook, LinkedIn, and Google Business Profile. Most clients start with 1-2 platforms and expand from there. We recommend starting where your customers already spend time."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How long before I see results?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Most clients notice a difference in their online presence within the first 2 weeks — your pages look active, professional, and current. Measurable growth in engagement and inquiries typically shows up within 60-90 days of consistent posting."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -29,8 +127,10 @@
                 </a>
 
                 <div class="nav-links">
-                    <a href="#about">About us</a>
-                    <a href="blog">Blog</a> <!-- Clean URL -->
+                    <a href="about">About</a>
+                    <a href="services">Services</a>
+                    <a href="blog">Blog</a>
+                    <a href="contact">Contact</a>
                     <a href="#leads" class="btn btn-sm btn-primary">Free Audit + Growth Pack</a>
                 </div>
             </nav>
@@ -46,12 +146,10 @@
             </div>
 
             <!-- Headline -->
-            <h1 class="headline">Turn Your Ideas Into a <span class="gradient-text">Professional Brand</span> That
-                Builds Trust and Wins Clients.</h1>
+            <h1 class="headline">Social Media Management That <span class="gradient-text">Builds Trust</span> and Wins You Clients.</h1>
 
             <!-- Subheadline -->
-            <p class="subheadline">We help businesses transform their vision into polished, strategic design — without
-                the stress. Get a <strong>free post pack, audit, and content calendar</strong> to start.</p>
+            <p class="subheadline">We manage your social media so your business looks active, professional, and trusted online — without you lifting a finger. Get a <strong>free audit, post pack, and 30-day content calendar</strong> to see the difference.</p>
 
             <div id="leads" class="hero-form-container glass-card">
                 <h3>Get My Free Audit + Growth Pack</h3>
@@ -104,20 +202,20 @@
             <div class="benefit-grid">
                 <!-- Block 1 -->
                 <div class="benefit-card glass-card">
-                    <h3>We Listen</h3>
-                    <p>“We start with your ideas and bring them to life — not impose our own vision.”</p>
+                    <h3>Your Voice, Not Ours</h3>
+                    <p>Every post sounds like you wrote it. We start with your ideas, your tone, and your audience — then make it polished and consistent.</p>
                 </div>
 
                 <!-- Block 2 -->
                 <div class="benefit-card glass-card">
-                    <h3>We Execute Efficiently</h3>
-                    <p>“Clear process. Fast communication. Seamless execution.”</p>
+                    <h3>Zero Hours From Your Team</h3>
+                    <p>You approve a calendar once a month. We handle everything else — writing, designing, scheduling, and monitoring responses.</p>
                 </div>
 
                 <!-- Block 3 -->
                 <div class="benefit-card glass-card">
-                    <h3>We Deliver Detail</h3>
-                    <p>“Nothing missed. Every important detail captured.”</p>
+                    <h3>Nothing Falls Through the Cracks</h3>
+                    <p>Every detail matters — from hashtags to review responses. You get a team that catches the small things that build (or break) trust.</p>
                 </div>
             </div>
 
@@ -230,7 +328,7 @@
             <div class="pricing-card glass-card">
                 <h3>Starter</h3>
                 <div class="price">$485<span>/mo</span></div>
-                <p>For basic consistency and protection</p>
+                <p>4 professional posts per month on one platform so your page never looks abandoned.</p>
                 <hr>
                 <ul class="benefits">
                     <li>4 posts per month (1 platform)</li>
@@ -238,14 +336,14 @@
                     <li>Google review monitoring</li>
                     <li>Light reporting</li>
                 </ul>
-                <a href="#" class="btn btn-secondary full-width">Get Started</a>
+                <a href="contact" class="btn btn-secondary full-width">Get Started</a>
             </div>
 
             <div class="pricing-card glass-card popular">
                 <span class="popular-badge">Most Popular</span>
                 <h3>Growth</h3>
                 <div class="price">$1,485<span>/mo</span></div>
-                <p>For trust and presence handled end-to-end</p>
+                <p>12 posts across two platforms, plus review management. Your full online presence, handled.</p>
                 <hr>
                 <ul class="benefits">
                     <li>12 posts per month (2 platforms)</li>
@@ -253,13 +351,13 @@
                     <li>Review monitoring + drafts</li>
                     <li>Monthly reporting & optimization</li>
                 </ul>
-                <a href="#" class="btn btn-primary full-width">Get Started</a>
+                <a href="contact" class="btn btn-primary full-width">Get Started</a>
             </div>
 
             <div class="pricing-card glass-card">
                 <h3>Premium</h3>
                 <div class="price">$2,985<span>/mo</span></div>
-                <p>For visibility, authority, and scale</p>
+                <p>Daily posting on three platforms, weekly newsletters, and campaign strategy. Full visibility.</p>
                 <hr>
                 <ul class="benefits">
                     <li>Daily posting (3 platforms)</li>
@@ -267,7 +365,7 @@
                     <li>Advanced review support</li>
                     <li>Campaign planning</li>
                 </ul>
-                <a href="#" class="btn btn-secondary full-width">Get Started</a>
+                <a href="contact" class="btn btn-secondary full-width">Get Started</a>
             </div>
         </div>
     </section>
@@ -296,9 +394,25 @@
             </details>
             <!-- Original Objection -->
             <details class="glass-card">
-                <summary>We’ve tried social media agencies before.</summary>
+                <summary>We've tried social media agencies before.</summary>
                 <p>Most agencies focus on "going viral." We focus on "building trust." We aren't trying to make you an
                     influencer; we're ensuring your business looks actively open for business.</p>
+            </details>
+
+            <!-- SEO-targeted FAQs -->
+            <details class="glass-card">
+                <summary>How often should a small business post on social media?</summary>
+                <p>For most small businesses, 3-4 posts per week is the sweet spot. Enough to stay visible and active, without burning out. Consistency matters more than volume — a steady 3 posts per week beats 10 posts one week and silence the next.</p>
+            </details>
+
+            <details class="glass-card">
+                <summary>What platforms do you post on?</summary>
+                <p>We work with Instagram, Facebook, LinkedIn, and Google Business Profile. Most clients start with 1-2 platforms and expand from there. We recommend starting where your customers already spend time.</p>
+            </details>
+
+            <details class="glass-card">
+                <summary>How long before I see results?</summary>
+                <p>Most clients notice a difference in their online presence within the first 2 weeks — your pages look active, professional, and current. Measurable growth in engagement and inquiries typically shows up within 60-90 days of consistent posting.</p>
             </details>
         </div>
     </section>
@@ -318,6 +432,12 @@
 
     <footer>
         <div class="container center-text">
+            <div class="footer-nav">
+                <a href="about">About</a>
+                <a href="services">Services</a>
+                <a href="blog">Blog</a>
+                <a href="contact">Contact</a>
+            </div>
             <p class="copyright">© 2026 PoppyPages. All rights reserved.</p>
         </div>
     </footer>

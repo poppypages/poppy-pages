@@ -701,24 +701,26 @@ body.menu-open {
     .nav-links {
         position: fixed;
         top: 0;
+        left: 0;
         right: 0;
-        width: 280px;
-        height: 100vh;
-        height: 100dvh;
+        width: 100%;
         background: white;
         flex-direction: column;
-        padding: 100px 30px 40px;
+        padding: 90px 30px 40px;
         gap: 0;
         z-index: 100;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        pointer-events: none;
         visibility: hidden;
     }
 
     .nav-links.open {
-        transform: translateX(0);
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
         visibility: visible;
     }
 

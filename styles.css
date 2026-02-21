@@ -2249,7 +2249,7 @@ h2,
 @media (max-width: 768px) {
     h1,
     .headline {
-        font-size: 1.6rem !important;
+        font-size: 4.8rem !important;
         letter-spacing: -0.5px;
         line-height: 1.15;
         overflow-wrap: break-word;

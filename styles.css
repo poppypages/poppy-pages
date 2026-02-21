@@ -1560,32 +1560,7 @@ select {
     }
 }
 
-/* Premium Orbs */
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    z-index: -1;
-    opacity: 0.5;
-    animation: float 20s infinite alternate;
-}
-
-.orb-1 {
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(255, 127, 80, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.orb-2 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(254, 180, 123, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
-    bottom: -100px;
-    right: -100px;
-}
+/* Premium Orbs - kept as position:fixed from base styles to prevent mobile overflow */
 
 /* Animations */
 @keyframes float {

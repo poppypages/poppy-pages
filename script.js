@@ -1,6 +1,45 @@
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg5p1Yh7RhuhY8VEJyzgbBEQW73F5C8csxZqqIJ_DqWexlH44jkpjc-Vk_gTvYwPPY9g/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // MOBILE MENU
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-overlay';
+        document.body.appendChild(overlay);
+
+        const toggleMenu = () => {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen);
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        };
+
+        const closeMenu = () => {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Close on nav link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
+        });
+    }
+
     // 0. ADMIN SECURITY (Simple)
     if (window.location.pathname.includes('admin')) {
         const pass = prompt("Enter Admin Password:");

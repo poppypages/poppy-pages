@@ -63,7 +63,13 @@ Google can't "see" images. Alt text describes what's in the image and helps it a
 
 Over 60% of Google searches happen on mobile. Test your site at Google's Mobile-Friendly Test tool. Fix any issues it flags.
 
+
+
+
+
 ## Google Business Profile Optimization
+
+![](assets/images/uploads/6.png)
 
 ### 6. Claim and Verify Your Google Business Profile
 
@@ -85,7 +91,13 @@ Reviews are the #1 local ranking factor after your Google Business Profile itsel
 
 Google Business lets you publish posts (updates, offers, events). Businesses that post weekly rank higher in local search. Set a reminder every Monday.
 
+
+
+
+
 ## Technical SEO Basics
+
+![](assets/images/uploads/5.png)
 
 ### 11. Check Your Site Speed
 
@@ -107,6 +119,8 @@ Google Search Console is free. It shows you how Google sees your site, what keyw
 
 NAP = Name, Address, Phone number. This must be identical across your website, Google Business Profile, Yelp, Facebook, and every other listing. Inconsistencies tank your local rankings.
 
+
+
 ## Free SEO Tools You Should Be Using
 
 | Tool                      | What It Does                               | Cost        |
@@ -118,6 +132,8 @@ NAP = Name, Address, Phone number. This must be identical across your website, G
 | AnswerThePublic           | Find questions people ask about your topic | Free tier   |
 
 ## The SEO Priority Matrix
+
+![](assets/images/uploads/4.png)
 
 Not all fixes are equal. Here's where to focus first:
 

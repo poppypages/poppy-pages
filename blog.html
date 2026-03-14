@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoppyPages | Social Media Tips & Brand Building Blog</title>
-    <meta name="description" content="Practical tips on social media management, brand building, and online presence for small businesses. No fluff — just what works.">
+    <meta name="description"
+        content="Practical tips on social media management, brand building, and online presence for small businesses. No fluff — just what works.">
     <link rel="canonical" href="https://poppypages.com/blog">
 
     <meta property="og:title" content="PoppyPages Blog | Social Media Tips for Small Business">
-    <meta property="og:description" content="Practical tips on social media management, brand building, and online presence for small businesses.">
+    <meta property="og:description"
+        content="Practical tips on social media management, brand building, and online presence for small businesses.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://poppypages.com/blog">
     <meta property="og:image" content="https://poppypages.com/assets/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PoppyPages Blog | Social Media Tips for Small Business">
-    <meta name="twitter:description" content="Practical tips on social media management, brand building, and online presence for small businesses.">
+    <meta name="twitter:description"
+        content="Practical tips on social media management, brand building, and online presence for small businesses.">
     <meta name="twitter:image" content="https://poppypages.com/assets/og-image.png">
 
     <link rel="stylesheet" href="styles.css">
@@ -98,15 +101,15 @@
             }
 
             container.innerHTML = posts.map(post => `
-                <article class="glass-card blog-card">
-                    ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px 15px 0 0;">` : ''}
+                <a href="post?slug=${post.slug}" class="glass-card blog-card" style="display: block; text-decoration: none; color: inherit;">
+                    ${post.thumbnail ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: auto; object-fit: contain; border-radius: 15px 15px 0 0;">` : ''}
                     <div class="blog-content">
                         <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
-                        <h2 class="blog-title">${post.title}</h2>
+                        <h2 class="blog-title" style="line-height: 1.1;">${post.title}</h2>
                         <p class="blog-excerpt">${post.description || post.excerpt || ''}</p>
-                        <a href="post?slug=${post.slug}" class="gradient-text" style="font-weight: 700; display: inline-block; margin-top: 15px;">Read More →</a>
+                        <span class="gradient-text" style="font-weight: 700; display: inline-block; margin-top: 15px;">Read More →</span>
                     </div>
-                </article>
+                </a>
             `).join('');
         }
 

@@ -1,28 +1,51 @@
-# PoppyPages | Social Media Agency Funnel
+# PoppyPages Marketing website
 
-A high-converting, multi-step lead capture funnel designed for social media agencies. This project includes a landing page, a detailed audit form, and a verified Google Sheets integration.
+The site at poppypages.com. Plain HTML, CSS and JavaScript, hosted on Vercel. No framework.
 
-## 🚀 Features
+## How the site is put together
 
-- **Multi-Step Funnel**: High-conversion landing page to capture initial interest.
-- **Tailored Audit**: Step-by-step business audit to qualify leads.
-- **Premium Design**: Modern, glassmorphic UI with smooth animations.
-- **Google Sheets Integration**: Automatic, secure lead tracking.
-- **Bot Protection**: Built-in honeypot and server-side sanitization.
-- **Responsive**: Fully optimized for mobile and desktop.
+- The pages in the repo root are what Vercel serves. `vercel.json` turns on clean URLs
+  (`/services` instead of `/services.html`) and holds two short links (`/free-pack`, `/thank-u`).
+- `styles.css` and `script.js` are shared by every page. `js/home.js` runs the homepage
+  animations, `js/blog.js` fills the blog list and `js/chat.js` runs the audit chat.
+- `fonts/` and `js/vendor/` hold the fonts and the GSAP animation library, so the site
+  does not depend on outside servers to look right.
+- `api/` holds the blog routes. `content/blog/` and `admin/` are the blog posts and the
+  Decap CMS editor.
 
-## 🛠 Tech Stack
+## Editing the newer pages
 
-- **Frontend**: Vanilla HTML5, CSS3, JavaScript.
-- **Backend**: Google Apps Script (Serverless).
-- **Deployment**: Optimized for Vercel/Netlify.
+Home, Services, About, Contact, Blog, Chat, Thank you and the 404 page are built from
+`src/`. The header, footer, icons, pricing and closing call to action live in
+`src/partials/`, so each is edited in one place.
 
-## 📦 Deployment
+1. Edit files in `src/pages/`, `src/partials/` or `src/script.js`.
+2. Run `node tools/build.mjs`. It writes the finished pages and `script.js` into the repo root.
+3. Commit both the `src/` change and the rebuilt files.
 
-1. Create a new repository on GitHub.
-2. Push this folder to your repository.
-3. Connect the repository to Vercel for instant, free hosting.
+`styles.css` and the files in `js/` are edited directly.
 
-## 📄 License
+The older pages (locations, service detail pages, case studies, comparisons, FAQ, the
+`/audit` form and blog posts) keep their own HTML. The shared `styles.css` and `script.js`
+give them the new look and swap in the new header and footer when they load.
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+## Running it locally
+
+```
+npm install
+node tools/serve.mjs
+```
+
+Then open http://localhost:4173. The local server follows the same URL rules as Vercel
+and runs the blog routes.
+
+## Things to keep in mind
+
+- The lead forms post to Google Apps Script. A test entry on any copy of the site lands
+  in the real lead sheets.
+- `src/`, `tools/` and this README are left out of the deployed site by `.vercelignore`.
+- Plan prices and what each plan includes are in `src/partials/pricing.html`.
+
+## License
+
+MIT. See [LICENSE.md](LICENSE.md).

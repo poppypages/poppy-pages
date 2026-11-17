@@ -3,649 +3,93 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chat | PoppyPages</title>
-    <style>
-        :root {
-            --bg-color: #f0f2f5;
-            --chat-bg: #ffffff;
-            --bot-bubble: #e4e6eb;
-            --bot-text: #050505;
-            --user-bubble: #0084ff;
-            --user-text: #ffffff;
-            --input-bg: #f0f2f5;
-            --border: #e4e6eb;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body,
-        html {
-            height: 100%;
-            background-color: var(--bg-color);
-            overflow: hidden;
-            /* Prevent body scroll, handle in chat window */
-        }
-
-        .chat-app {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--chat-bg);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .chat-header {
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--chat-bg);
-            z-index: 10;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #FF7F50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .header-info h2 {
-            font-size: 1.1rem;
-            color: #1a1a1a;
-        }
-
-        .header-info p {
-            font-size: 0.8rem;
-            color: #65676b;
-        }
-
-        .chat-window {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            scroll-behavior: smooth;
-        }
-
-        .message-row {
-            display: flex;
-            width: 100%;
-        }
-
-        .message-row.bot {
-            justify-content: flex-start;
-        }
-
-        .message-row.user {
-            justify-content: flex-end;
-        }
-
-        .bubble {
-            max-width: 75%;
-            padding: 12px 16px;
-            border-radius: 20px;
-            font-size: 1rem;
-            line-height: 1.4;
-            position: relative;
-            word-wrap: break-word;
-        }
-
-        .message-row.bot .bubble {
-            background: var(--bot-bubble);
-            color: var(--bot-text);
-            border-bottom-left-radius: 4px;
-        }
-
-        .message-row.user .bubble {
-            background: var(--user-bubble);
-            color: var(--user-text);
-            border-bottom-right-radius: 4px;
-        }
-
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 8px;
-            justify-content: flex-end;
-            width: 100%;
-        }
-
-        .quick-reply-btn {
-            background: transparent;
-            border: 1px solid var(--user-bubble);
-            color: var(--user-bubble);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .quick-reply-btn:hover {
-            background: var(--user-bubble);
-            color: white;
-        }
-
-        .input-area {
-            padding: 16px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 10px;
-            background: var(--chat-bg);
-        }
-
-        input[type="text"],
-        input[type="tel"] {
-            flex: 1;
-            padding: 12px 20px;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            background: var(--input-bg);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        input[type="text"]:focus,
-        input[type="tel"]:focus {
-            border-color: #bcc0c4;
-        }
-
-        .send-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--user-bubble);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-
-        .send-btn:active {
-            transform: scale(0.95);
-        }
-
-        .send-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            margin-left: 2px;
-        }
-
-        /* Typing indicator */
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 12px 16px;
-            background: var(--bot-bubble);
-            border-radius: 20px;
-            border-bottom-left-radius: 4px;
-            width: fit-content;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background: #8b8d92;
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
-
-        .dot:nth-child(1) {
-            animation-delay: -0.32s;
-        }
-
-        .dot:nth-child(2) {
-            animation-delay: -0.16s;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0);
-            }
-
-            40% {
-                transform: scale(1);
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        a {
-            color: var(--user-bubble);
-            text-decoration: underline;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Free Audit | PoppyPages Marketing</title>
+    <meta name="description" content="Answer a few quick questions so we can build your free marketing audit.">
+    <link rel="canonical" href="https://poppypages.com/chat">
+    <meta name="theme-color" content="#1a0a25">
+    <meta property="og:title" content="Your Free Audit | PoppyPages Marketing">
+    <meta property="og:description" content="Answer a few quick questions so we can build your free marketing audit.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poppypages.com/chat">
+    <meta property="og:image" content="https://poppypages.com/assets/og-image.png">
+    <meta property="og:site_name" content="PoppyPages Marketing">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="noindex">
+    <link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <script>
+      // hide the hero's animated bits until the intro runs (failsafe shows them after 2.5s)
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('pp-loading');
+        setTimeout(function () { document.documentElement.classList.remove('pp-loading'); }, 2500);
+      }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EY4C8ZEGSY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-EY4C8ZEGSY');
     </script>
+
 </head>
 
-<body>
+<body class="chat-page">
+    <!-- icon sprite -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+            <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5 6.1 20.6l1.2-6.5L2.5 9.5l6.6-.9z"/></symbol>
+            <symbol id="i-post" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="9" cy="9.5" r="1.6"/><path d="M4 17l4.5-4.5 3.5 3.5 3-3 5 5"/></symbol>
+            <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8 8 0 0 1-11.7 7.1L4 20l1.4-4.6A8 8 0 1 1 20.5 11.5z"/></symbol>
+            <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+            <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/></symbol>
+            <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7.5l8 6 8-6"/></symbol>
+            <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3"/></symbol>
+            <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="3"/><path d="M8 8.5h8M8 12.5h8M8 16.5h4"/></symbol>
+            <symbol id="i-sheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M3.5 9.5h17M3.5 15h17M10 3.5v17"/></symbol>
+            <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+            <symbol id="i-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5l1.5-5h13l1.5 5M4 9.5v10h16v-10M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0M10 19.5v-5h4v5"/></symbol>
+            <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/><path d="M8.5 12.5h2l1-2 1.5 4 1-2h1.5"/></symbol>
+            <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+        </defs>
+    </svg>
 
-    <div class="chat-app">
-        <div class="chat-header">
-            <div class="avatar">PP</div>
-            <div class="header-info">
-                <h2>PoppyPages Audit</h2>
-                <p>Typically replies instantly</p>
-            </div>
+    <header class="chat-top">
+        <a class="brand" href="/" aria-label="PoppyPages Marketing home">
+            <img src="/assets/poppy-mark.webp" width="38" height="38" alt="">
+            <span class="brand-word">PoppyPages<small>Marketing</small></span>
+        </a>
+        <a class="chat-exit" href="/contact">Rather talk? Book a call</a>
+    </header>
+
+    <main class="chat-shell" id="main">
+        <div class="chat-progress" aria-hidden="true">
+            <span id="chat-step">Free audit</span>
+            <div class="bar"><i id="chat-bar"></i></div>
+            <span id="chat-pct">0%</span>
         </div>
-
-        <div class="chat-window" id="chat-window">
-            <!-- Messages will be injected here -->
+        <h1 class="sr-only">Your free marketing audit</h1>
+        <div class="chat-window" id="chat-window" role="log" aria-live="polite" aria-label="Audit questions"></div>
+        <div class="chat-foot">
+            <form class="chat-input" id="chat-form" hidden novalidate>
+                <label for="chat-text" class="sr-only">Your answer</label>
+                <input type="text" id="chat-text" autocomplete="off" placeholder="Type your answer">
+                <button type="submit" aria-label="Send"><svg><use href="#i-arrow"/></svg></button>
+            </form>
+            <p class="chat-skip">Your answers are only used to build your audit. <a href="/thank-u" id="chat-skip-link">Skip the questions</a></p>
         </div>
+        <noscript><p class="lead">This short form needs JavaScript. You can also email support@poppypages.com and we will take it from there.</p></noscript>
+    </main>
 
-        <div class="input-area" id="input-area">
-            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
-            <button class="send-btn" id="send-btn">
-                <svg viewBox="0 0 24 24">
-                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const chatWindow = document.getElementById('chat-window');
-        const inputArea = document.getElementById('input-area');
-        const userInput = document.getElementById('user-input');
-        const sendBtn = document.getElementById('send-btn');
-
-        // Google App Script URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYXJZzSzcgFy-GAxiCqYzfvll0znjVX3QzoaFgnmXgxPomCClbxHj0La-YdNPseAIJJw/exec';
-
-        // State to hold gathered info
-        const state = {
-            name: '',
-            businessName: '',
-            niche: '',
-            goal: '',
-            problem: '',
-            postFrequency: '',
-            revenueRaw: '',
-            revenueParsed: 0,
-            budgetRaw: '',
-            budgetParsed: 0,
-            phone: '',
-            email: ''
-        };
-
-        // Grab email from URL Params
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('email')) {
-            state.email = urlParams.get('email');
-        }
-
-        // Send Data to Google Sheet
-        const syncToSheet = () => {
-            const formData = new FormData();
-            for (const key in state) {
-                formData.append(key, state[key]);
-            }
-            formData.append('timestamp', new Date().toISOString());
-            formData.append('source', 'chat-flow');
-
-            // Fire and forget using Navigator.sendBeacon if available, else fetch
-            // Using URLSearchParams for Google Apps Script compatibility
-            const params = new URLSearchParams();
-            for (const key in state) {
-                params.append(key, state[key]);
-            }
-            params.append('timestamp', new Date().toISOString());
-            params.append('source', 'chat-flow');
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: params
-            }).catch(e => console.log('Sync err:', e));
-        };
-
-        // Sync whenever user unloads
-        window.addEventListener('beforeunload', () => {
-            syncToSheet();
-        });
-
-        let currentStep = 0;
-
-        // Booking link for fallback
-        const BOOKING_LINK = "https://calendly.com/example/booking";
-
-        // Helper: Delay
-        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-        // Scroll to bottom
-        const scrollToBottom = () => {
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-        };
-
-        // Add Bot Message
-        const addBotMessage = async (text, options = null) => {
-            // Show typing
-            const typingId = `typing-${Date.now()}`;
-            const typingHtml = `
-            <div class="message-row bot" id="${typingId}">
-                <div class="typing-indicator">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
-        `;
-            chatWindow.insertAdjacentHTML('beforeend', typingHtml);
-            scrollToBottom();
-
-            // Simulate typing time based on length
-            const readDelay = Math.min(Math.max(text.length * 30, 800), 2500);
-            await delay(readDelay);
-
-            // Remove typing
-            document.getElementById(typingId).remove();
-
-            // Add message
-            const msgHtml = `
-            <div class="message-row bot">
-                <div class="bubble">${text}</div>
-            </div>
-        `;
-            chatWindow.insertAdjacentHTML('beforeend', msgHtml);
-
-            // Add Quick Replies if any
-            if (options) {
-                const btnsHtml = options.map(opt => `<button class="quick-reply-btn" data-value="${opt}">${opt}</button>`).join('');
-                const qrContainer = `
-                <div class="message-row user" id="qr-${typingId}">
-                    <div class="quick-replies">${btnsHtml}</div>
-                </div>
-            `;
-                chatWindow.insertAdjacentHTML('beforeend', qrContainer);
-
-                // Attach listeners
-                document.querySelectorAll(`#qr-${typingId} .quick-reply-btn`).forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        const value = this.getAttribute('data-value');
-                        document.getElementById(`qr-${typingId}`).remove();
-                        addUserMessage(value);
-                        handleResponse(value);
-                    });
-                });
-
-                // Hide text input when quick replies are active to encourage using them
-                inputArea.classList.add('hidden');
-            } else {
-                inputArea.classList.remove('hidden');
-                userInput.focus();
-            }
-
-            scrollToBottom();
-        };
-
-        // Add User Message
-        const addUserMessage = (text) => {
-            const msgHtml = `
-            <div class="message-row user">
-                <div class="bubble">${text}</div>
-            </div>
-        `;
-            chatWindow.insertAdjacentHTML('beforeend', msgHtml);
-            userInput.value = '';
-            scrollToBottom();
-        };
-
-        // Sophisticated Number Parser
-        const parseMoney = (raw) => {
-            let val = raw.toLowerCase().trim();
-
-            // Check for yearly patterns
-            const isYearly = val.includes('year') || val.includes('yr') || val.includes('annual');
-
-            // Remove everything but numbers, decimals, k, m
-            val = val.replace(/[^0-9.km]/g, '');
-
-            if (!val) return null;
-
-            let multiplier = 1;
-            if (val.includes('k')) {
-                multiplier = 1000;
-                val = val.replace('k', '');
-            } else if (val.includes('m')) {
-                multiplier = 1000000;
-                val = val.replace('m', '');
-            }
-
-            let num = parseFloat(val);
-            if (isNaN(num)) return null;
-
-            num = num * multiplier;
-
-            if (isYearly) {
-                num = num / 12; // Convert to monthly
-            }
-
-            return num;
-        };
-
-        const offerBookingLink = async (fallbackMsg) => {
-            await addBotMessage(fallbackMsg);
-            await addBotMessage(`You can just grab a time on my calendar here if that's easier: <a href="${BOOKING_LINK}" target="_blank">Book a quick chat</a>`);
-            // End flow
-        };
-
-        // Flow Logic
-        const flow = [
-            {
-                // 0: Start
-                run: async () => {
-                    await addBotMessage("Hey! 👋 Thanks for requesting the growth pack.");
-                    await addBotMessage("I just sent it to your email. While you wait for it to arrive, I strongly recommend we customize the actual strategy for your specific business. Do you have 60 seconds to answer a few quick questions?", ["Yeah, let's do it", "Sure"]);
-                    syncToSheet(); // Initial sync of email
-                }
-            },
-            {
-                // 1: Name
-                run: async () => {
-                    await addBotMessage("Awesome. Real quick, what's your name?");
-                },
-                process: (val) => {
-                    state.name = val;
-                    // Try to get just first name
-                    const firstName = val.split(' ')[0];
-                    return firstName;
-                }
-            },
-            {
-                // 2: Business
-                run: async (firstName) => {
-                    await addBotMessage(`Nice to meet you, ${firstName}! What's the name of your business?`);
-                },
-                process: (val) => { state.businessName = val; return val; }
-            },
-            {
-                // 3: Niche
-                run: async () => {
-                    await addBotMessage("Got it. And what specific industry or niche are you in?");
-                },
-                process: (val) => { state.niche = val; return val; }
-            },
-            {
-                // 4: Goal
-                run: async () => {
-                    await addBotMessage("Cool. When it comes to social media right now, what's your #1 goal?",
-                        ["More leads", "Better brand awareness", "Look more professional", "Not sure yet"]);
-                },
-                process: (val) => { state.goal = val; return val; }
-            },
-            {
-                // 5: Problem
-                run: async () => {
-                    await addBotMessage("Makes sense. What would you say is the biggest problem holding you back from that?",
-                        ["No time", "Don't know what to post", "Inconsistent", "Not getting results"]);
-                },
-                process: (val) => { state.problem = val; return val; }
-            },
-            {
-                // 6: Frequency
-                run: async () => {
-                    await addBotMessage("I hear that literally all the time. How often are you posting right now?",
-                        ["Every day", "A few times a week", "Rarely", "Never"]);
-                },
-                process: (val) => { state.postFrequency = val; return val; }
-            },
-            {
-                // 7: Revenue (Free text)
-                run: async () => {
-                    await addBotMessage("Okay, just two quick business questions so I can match you with the right strategy plan.");
-                    await addBotMessage("Roughly what is your current monthly revenue? (e.g. 10k, 50,000, 1M/yr)");
-                    userInput.type = 'text'; // ensure it's text
-                },
-                process: async (val) => {
-                    state.revenueRaw = val;
-                    const parsed = parseMoney(val);
-                    if (parsed === null) {
-                        await offerBookingLink("Hmm, I didn't quite catch that number - no worries at all though!");
-                        return false; // Stop flow
-                    }
-                    state.revenueParsed = parsed;
-                    return true;
-                }
-            },
-            {
-                // 8: Budget (Free text)
-                run: async () => {
-                    await addBotMessage("Perfect.");
-                    await addBotMessage("And if we could completely take social media off your plate and hit those goals, what kind of monthly budget do you have allocated for marketing?");
-                },
-                process: async (val) => {
-                    state.budgetRaw = val;
-                    const parsed = parseMoney(val);
-                    if (parsed === null) {
-                        await offerBookingLink("Hmm, looks like my robot brain couldn't read that budget - no stress though!");
-                        return false; // Stop
-                    }
-                    state.budgetParsed = parsed;
-                    return true;
-                }
-            },
-            {
-                // 9: Phone
-                run: async () => {
-                    await addBotMessage("That gives me exactly what I need. 🙌");
-                    await addBotMessage("Last thing – what's the best phone number to text you at just in case we have a quick question about your audit?");
-                    userInput.type = 'tel';
-                },
-                process: (val) => { state.phone = val; return val; }
-            },
-            {
-                // 10: Routing & End
-                run: async () => {
-                    inputArea.classList.add('hidden');
-                    await addBotMessage("Thanks! Analyzing your profile & building your custom path...");
-
-                    // Simulated loading
-                    await delay(2000);
-
-                    // Routing Logic
-                    const budget = state.budgetParsed;
-                    const rev = state.revenueParsed;
-                    let route = 'low-ticket.html'; // Default
-
-                    if (budget > 1500 || rev > 50000) {
-                        route = 'high-ticket.html';
-                    } else if ((budget >= 500 && budget <= 1500) || (rev >= 20000 && rev <= 50000)) {
-                        route = 'mid-ticket.html';
-                    }
-
-                    console.log("Gathered State:", state);
-                    console.log("Routing to:", route);
-
-                    await addBotMessage(`Alright, we're all set! I'd normally redirect you to <b>${route}</b> right now based on your answers.`);
-                    window.location.href = route;
-                }
-            }
-        ];
-
-        let currentPassData = null;
-
-        const handleResponse = async (text) => {
-            if (!text.trim()) return;
-
-            const step = flow[currentStep];
-
-            if (step.process) {
-                const result = await step.process(text);
-                if (result === false) return; // Flow was stopped (error offering booking link)
-                currentPassData = result;
-
-                // Sync data after every successful step
-                syncToSheet();
-            }
-
-            currentStep++;
-
-            if (currentStep < flow.length) {
-                await flow[currentStep].run(currentPassData);
-            }
-        };
-
-        // Event Listeners
-        sendBtn.addEventListener('click', () => {
-            const text = userInput.value;
-            if (text) {
-                addUserMessage(text);
-                handleResponse(text);
-            }
-        });
-
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const text = userInput.value;
-                if (text) {
-                    addUserMessage(text);
-                    handleResponse(text);
-                }
-            }
-        });
-
-        // Start Flow
-        window.onload = () => {
-            flow[0].run();
-        };
-
-    </script>
+    <script src="/js/chat.js" defer></script>
 </body>
 
 </html>

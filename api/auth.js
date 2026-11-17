@@ -10,7 +10,7 @@ module.exports = (req, res) => {
     const url = new URL('https://github.com/login/oauth/authorize');
     url.searchParams.set('client_id', clientId);
     url.searchParams.set('redirect_uri', `${siteOrigin(req)}/api/callback`);
-    url.searchParams.set('scope', 'public_repo,user');
+    url.searchParams.set('scope', 'repo,user');
     url.searchParams.set('state', state);
 
     // The callback only accepts a login that started here, in this browser.

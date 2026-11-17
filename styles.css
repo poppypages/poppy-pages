@@ -850,3 +850,24 @@ body[style*="f8fafc"] input, body[style*="f8fafc"] textarea, body[style*="f8fafc
     .marquee-track { animation: none; flex-wrap: wrap; width: auto; }
     .rotator span { transition: none; }
 }
+
+/* ---------- 17. article pages (blog posts, service, area and guide pages) ---------- */
+.wrap-narrow { max-width: 900px; }
+.page-hero .label a { color: inherit; border-bottom: 1px solid currentColor; }
+.post-hero h1 { max-width: 22ch; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.04; }
+.post-meta { color: var(--muted); font-size: 1rem; }
+.post-hero-img { width: 100%; height: auto; border-radius: var(--r-l); margin: 0 0 36px; border: 1px solid var(--line); }
+.post-back { margin-top: 36px; }
+.answer-box { padding: clamp(22px, 3vw, 32px); border-radius: var(--r-l); border: 1px solid var(--line-strong); background: rgba(255, 178, 26, 0.07); display: grid; gap: 12px; margin-bottom: 40px; }
+.answer-box h2 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin: 0; }
+.answer-box p { color: var(--text); font-size: 1.16rem; line-height: 1.6; margin: 0; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0 0 40px; padding: 0; list-style: none; }
+.facts li { padding: 18px 20px; border-radius: var(--r-m); border: 1px solid var(--line); background: rgba(255, 255, 255, 0.035); display: grid; gap: 4px; margin: 0; }
+.facts b { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); }
+.facts span { color: var(--text); }
+.post-body .faq-list { margin: 8px 0 32px; }
+.post-body .faq-list summary { font-size: 1.15rem; padding: 18px 0; }
+.post-body .faq-list .answer { padding-bottom: 20px; margin: 0; }
+.post-body th { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+.post-body .related { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 10px 0 0; padding: 0; list-style: none; }
+.post-body .related li { margin: 0; }

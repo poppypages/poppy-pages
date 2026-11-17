@@ -1,4 +1,5 @@
 const https = require('https');
+const { safeEqual } = require('./_lib/oauth');
 
 // Helper: Make a GitHub API request
 function githubRequest(method, path, body) {
@@ -52,10 +53,15 @@ module.exports = async (req, res) => {
     }
 
     // Authenticate with a secret key (set in Vercel env vars)
-    const authHeader = req.headers['authorization'];
-    const expectedKey = `Bearer ${process.env.CREATE_POST_SECRET}`;
+    // Refuse everything unless a long secret is set, and compare it in constant time
+    const secret = process.env.CREATE_POST_SECRET;
+    if (!secret || secret.length < 32 || !process.env.GITHUB_TOKEN) {
+        return res.status(503).json({ error: 'Posting by API is turned off.' });
+    }
+    const authHeader = String(req.headers['authorization'] || '');
+    const expectedKey = `Bearer ${secret}`;
 
-    if (!authHeader || authHeader !== expectedKey) {
+    if (!safeEqual(authHeader, expectedKey)) {
         return res.status(401).json({ error: 'Unauthorized. Invalid or missing API key.' });
     }
 
@@ -71,27 +77,28 @@ module.exports = async (req, res) => {
         date,           // Optional: ISO date string, defaults to now
     } = req.body;
 
+    const oneLine = (v) => String(v || '').replace(/[\r\n]+/g, ' ').trim();
     if (!title || !body) {
         return res.status(400).json({ error: 'Missing required fields: title, body' });
     }
 
     // Build frontmatter
-    const now = date || new Date().toISOString();
+    const now = date && !isNaN(Date.parse(date)) ? new Date(date).toISOString() : new Date().toISOString();
     const slug = slugify(title);
     const fileName = `${now.substring(0, 10)}-${slug}`;
 
     const frontmatter = [
         '---',
         `layout: blog`,
-        `title: "${title.replace(/"/g, '\\"')}"`,
+        `title: "${oneLine(title).replace(/"/g, '\\"')}"`,
         `date: ${now}`,
-        `author: "${(author || 'PoppyPages Team').replace(/"/g, '\\"')}"`,
+        `author: "${(oneLine(author) || 'PoppyPages Team').replace(/"/g, '\\"')}"`,
     ];
 
-    if (thumbnail) frontmatter.push(`thumbnail: "${thumbnail}"`);
-    if (description) frontmatter.push(`description: "${description.replace(/"/g, '\\"')}"`);
-    if (llm_summary) frontmatter.push(`llm_summary: "${llm_summary.replace(/"/g, '\\"')}"`);
-    frontmatter.push(`schema_type: "${schema_type || 'BlogPosting'}"`);
+    if (thumbnail) frontmatter.push(`thumbnail: "${oneLine(thumbnail).replace(/"/g, '\\"')}"`);
+    if (description) frontmatter.push(`description: "${oneLine(description).replace(/"/g, '\\"')}"`);
+    if (llm_summary) frontmatter.push(`llm_summary: "${oneLine(llm_summary).replace(/"/g, '\\"')}"`);
+    frontmatter.push(`schema_type: "${['BlogPosting', 'Article', 'NewsArticle'].includes(schema_type) ? schema_type : 'BlogPosting'}"`);
     frontmatter.push('---');
 
     const fileContent = frontmatter.join('\n') + '\n\n' + body;
@@ -116,7 +123,7 @@ module.exports = async (req, res) => {
                 success: true,
                 message: `Post "${title}" published successfully!`,
                 slug: fileName,
-                url: `https://www.poppypages.com/post?slug=${fileName}`,
+                url: `https://www.poppypages.com/blog/${fileName}`,
                 github_url: result.data.content?.html_url || null,
             });
         } else {

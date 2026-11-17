@@ -16,3 +16,4 @@ yarn-error.log*
 .tmp/
 credentials.json
 token.json
+public/

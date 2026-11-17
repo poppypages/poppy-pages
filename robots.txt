@@ -1,9 +1,34 @@
+# PoppyPages Marketing: search engines and AI assistants are welcome.
+# The same few private paths are closed to every crawler.
+
 User-agent: *
 Allow: /
-
 Disallow: /admin/
 Disallow: /api/
 Disallow: /free-pack
 Disallow: /thank-u
 
-Sitemap: https://poppypages.com/sitemap.xml
+# AI search and answer crawlers (named so the welcome is explicit)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: Googlebot
+User-agent: DuckAssistBot
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /free-pack
+Disallow: /thank-u
+
+Sitemap: https://www.poppypages.com/sitemap.xml

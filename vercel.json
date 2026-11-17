@@ -1,7 +1,57 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
   "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     { "source": "/free-pack", "destination": "/audit" },
     { "source": "/thank-u", "destination": "/thank-you" }
+  ],
+  "redirects": [
+    {
+      "source": "/post",
+      "has": [{ "type": "query", "key": "slug", "value": "(?<slug>[a-z0-9-]+)" }],
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    { "source": "/post", "destination": "/blog", "permanent": true },
+    { "source": "/index", "destination": "/", "permanent": true },
+    { "source": "/manual_admin", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), usb=(), interest-cohort=()" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    },
+    {
+      "source": "/((?!admin(?:/|$)|api/).*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://app.cal.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://app.cal.com https://*.cal.com; frame-src https://app.cal.com https://cal.com; form-action 'self' https://script.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/admin(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'" },
+        { "key": "X-Robots-Tag", "value": "noindex" }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'none'" }
+      ]
+    }
   ]
 }

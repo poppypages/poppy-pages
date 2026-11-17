@@ -13,18 +13,35 @@ const port = +(process.argv[2] || 4173);
 const require = createRequire(import.meta.url);
 process.chdir(root);
 
-const rewrites = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8')).rewrites || [];
+const vercel = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf8'));
+const rewrites = vercel.rewrites || [];
+const redirects = vercel.redirects || [];
+// header rules use plain regex-style sources, so they can be matched directly
+const headerRules = (vercel.headers || []).map((h) => ({ re: new RegExp('^' + h.source + '$'), headers: h.headers }));
 const types = {
     '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'application/javascript',
     '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
     '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.svg': 'image/svg+xml',
     '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain'
 };
-const hidden = /^\/(src|tools|node_modules|\.git)(\/|$)/;
+const hidden = /^\/(src|tools|node_modules|public|content|\.git)(\/|$)/;
 
 http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
     let p = decodeURIComponent(url.pathname);
+    for (const rule of headerRules) if (rule.re.test(p)) for (const h of rule.headers) res.setHeader(h.key, h.value);
+    for (const r of redirects) {
+        if (r.source !== p) continue;
+        let dest = r.destination;
+        if (r.has) {
+            const q = r.has[0];
+            const m = new RegExp('^' + q.value + '$').exec(url.searchParams.get(q.key) || '');
+            if (!m) continue;
+            dest = dest.replace(/:([a-z]+)/g, (x, k) => m.groups[k]);
+        }
+        res.writeHead(308, { location: dest });
+        return res.end();
+    }
     const hit = rewrites.find((r) => r.source === p);
     if (hit) p = hit.destination;
 

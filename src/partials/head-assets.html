@@ -1,0 +1,13 @@
+    <link rel="preload" href="/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <script>
+      // hide the hero's animated bits until the intro runs (failsafe shows them after 2.5s)
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('pp-loading');
+        setTimeout(function () { document.documentElement.classList.remove('pp-loading'); }, 2500);
+      }
+    </script>

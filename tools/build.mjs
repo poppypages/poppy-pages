@@ -19,7 +19,7 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const matter = require('gray-matter');
-const { marked } = require('marked');
+import { marked } from 'marked';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const SITE = 'https://www.poppypages.com';

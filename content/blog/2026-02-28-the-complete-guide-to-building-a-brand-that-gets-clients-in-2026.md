@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: The Complete Guide to Building a Brand That Gets Clients in 2026
+title: "How to Grow from 0 to 1,000 LinkedIn Followers in 2026 (No Ads, No Bots)"
 date: 2026-02-28T12:12:00.000-05:00
 author: PoppyPages Team
 thumbnail: assets/images/uploads/2-28-2026-blog-thumbnail-grow-to-1000-linked-in-followers.png

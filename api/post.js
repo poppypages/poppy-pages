@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-const { marked } = require('marked');
 
 module.exports = async (req, res) => {
     const { slug } = req.query;
@@ -22,6 +21,8 @@ module.exports = async (req, res) => {
     const { data, content } = matter(fileContents);
 
     // Convert markdown body to HTML
+    // marked is an ES module, so it is loaded with import()
+    const { marked } = await import('marked');
     const htmlContent = marked.parse(content);
 
     res.status(200).json({

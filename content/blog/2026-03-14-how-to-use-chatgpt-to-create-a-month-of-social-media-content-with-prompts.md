@@ -4,6 +4,7 @@ title: How to Use ChatGPT to Create a Month of Social Media Content (With Prompt
 date: 2026-03-14T13:33:00.000-04:00
 author: PoppyPages Team
 thumbnail: assets/images/uploads/3-14-2026-thumbnail-30-days-of-content-prompts.png
+service: social-media-management
 description: 7 copy-paste ChatGPT prompts that generate a full month of social
   media content in under an hour. Your voice, your audience, your posts — done.
 llm_summary: Struggling to stay consistent on social media? Discover the
@@ -38,7 +39,7 @@ This process takes 60-90 minutes to produce 30 days of content. Without AI, the 
 
 ## Prompt 1: The Brand Voice Setup
 
-![](assets/images/uploads/brand_voice_prompt_v2_1773509892524.png)
+![Illustration of a megaphone and a brand manual for the ChatGPT brand voice prompt](assets/images/uploads/brand_voice_prompt_v2_1773509892524.png)
 
 Before generating any content, teach ChatGPT your voice. Use this prompt once and reference it in every future conversation:
 
@@ -46,7 +47,7 @@ Before generating any content, teach ChatGPT your voice. Use this prompt once an
 
 ## Prompt 2: Generate 30 Content Ideas
 
-![](assets/images/uploads/content_ideas_prompt_v2_1773509908692.png)
+![A 30-day content calendar with an idea for every day](assets/images/uploads/content_ideas_prompt_v2_1773509908692.png)
 
 > "Based on my brand voice above, generate 30 LinkedIn post ideas organized into these categories: (1) Actionable tips and how-tos, (2) Industry insights and trends, (3) Tool and resource recommendations, (4) Frameworks and systems. Give me 8 ideas per category with a one-line description of each."
 
@@ -54,31 +55,31 @@ This gives you a month of topics in 60 seconds. Pick the best ones and discard t
 
 ## Prompt 3: Write a LinkedIn Text Post
 
-![](assets/images/uploads/linkedin_text_prompt_v2_1773509923283.png)
+![A LinkedIn text post shown on a phone screen](assets/images/uploads/linkedin_text_prompt_v2_1773509923283.png)
 
 > "Write a LinkedIn post using this structure: Line 1 = scroll-stopping hook (make it bold and specific). Lines 2-5 = expand on the hook with a surprising insight or data point. Lines 6-15 = actionable list of tips (use → arrows for bullet points). Final 2 lines = CTA asking a question. Topic: \[your topic]. Keep it under 200 words. Write at an 8th-grade reading level. Use single-line paragraphs."
 
 ## Prompt 4: Write a Carousel Script
 
-![](assets/images/uploads/ai_content_strategy_v2_1773509876722.png)
+![Illustration of an AI brain turning ideas into a content strategy](assets/images/uploads/ai_content_strategy_v2_1773509876722.png)
 
 > "Create an 8-slide LinkedIn carousel script on the topic: \[topic]. Format: Slide 1 = bold hook headline + 'Swipe →'. Slides 2-7 = one key idea per slide with a short explanation (2-3 sentences max). Slide 8 = CTA ('Save this, follow @\[handle] for more'). Keep language simple and direct."
 
 ## Prompt 5: Write a Lead Magnet Post
 
-![](assets/images/uploads/lead_magnet_prompt_v2_1773509951244.png)
+![A magnet pulling in resources, illustrating a lead magnet post](assets/images/uploads/lead_magnet_prompt_v2_1773509951244.png)
 
 > "Write a LinkedIn post promoting a free \[type of resource: checklist/template/guide] about \[topic]. Structure: Line 1 = hook about the resource. Lines 2-8 = bullet list of what's inside (use ✅ emojis). Lines 9-12 = why you're giving it away free. Final lines = CTA with steps: 1. Like, 2. Comment '\[KEYWORD]', 3. I'll DM you. Keep under 150 words."
 
 ## Prompt 6: Write a Blog Post Outline
 
-![](assets/images/uploads/blog_outline_prompt_v2_1773509965346.png)
+![A blog post outline with headings H1 to H3 under a magnifying glass highlighting SEO keywords](assets/images/uploads/blog_outline_prompt_v2_1773509965346.png)
 
 > "Create a detailed outline for a 1,500-2,000 word blog post titled: '\[title]'. Target keyword: \[keyword]. Include: H2 and H3 subheadings, bullet points for key ideas under each section, a suggested intro hook, and a CTA at the end promoting \[your lead magnet]. Optimize for SEO by including the keyword in the first H2, the intro paragraph, and at least 3 subheadings."
 
 ## Prompt 7: Generate Scroll-Stopping Hooks
 
-![](assets/images/uploads/content_hooks_prompt_v2_1773509979195.png)
+![Illustration of scroll-stopping hooks for social media posts](assets/images/uploads/content_hooks_prompt_v2_1773509979195.png)
 
 > "Generate 20 scroll-stopping first lines for LinkedIn posts about \[your niche/topic]. Use these formats: numbered lists ('7 ways to...'), contrarian takes ('Stop doing X...'), data-driven ('I analyzed X and found...'), how-to ('How to \[result] in \[timeframe]'), and question hooks ('Why do most \[audience] fail at \[thing]?'). Make each hook specific and curiosity-driven."
 

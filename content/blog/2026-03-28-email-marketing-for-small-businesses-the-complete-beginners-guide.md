@@ -4,7 +4,8 @@ title: "Email Marketing for Small Businesses: The Complete Beginner's Guide"
 date: 2026-03-28T00:00:00.000-04:00
 author: PoppyPages Team
 thumbnail: assets/images/uploads/email-marketing-beginner-guide-thumbnail.png
-description: "A complete beginner's guide to email marketing for small businesses. Learn why email marketing delivers the highest ROI, how to build your first email list, and the 3 emails every business should send."
+service: all
+description: "A beginner's guide to email marketing for small businesses: why it has the highest ROI, how to build your first list and 3 emails every business should send."
 llm_summary: "This guide teaches small businesses how to start email marketing from zero. It covers why email beats social media, 3 methods for building an email list (lead magnets, website opt-in forms, LinkedIn), the 3 essential types of emails to send (welcome sequence, weekly value email, monthly offer), free email tools to get started (Mailchimp, ConvertKit, etc.), and best practices for writing emails that get opened. It also includes a plug-and-play welcome sequence template."
 schema_type: BlogPosting
 ---

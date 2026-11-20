@@ -4,6 +4,7 @@ title: "The Small Business SEO Checklist: 15 Things You Can Fix Today"
 date: 2026-03-07T11:35:00.000-05:00
 author: PoppyPages Team
 thumbnail: assets/images/uploads/3-7-2026-blog-thumbnail-.png
+service: seo-and-content-strategy
 description: Search engine optimization sounds complicated. But for small
   businesses, 80% of the value comes from getting 15 basic things right.
 llm_summary: >-
@@ -36,7 +37,7 @@ This checklist covers the highest-impact SEO fixes you can implement today — n
 
 ## On-Page SEO Fixes (Do These First)
 
-![](assets/images/uploads/7.png)
+![Small business SEO checklist: the 15 high-impact steps across on-page SEO, Google Business Profile and technical SEO](assets/images/uploads/7.png)
 
 ### 1. Write a Title Tag That Includes Your Main Keyword
 
@@ -69,7 +70,7 @@ Over 60% of Google searches happen on mobile. Test your site at Google's Mobile-
 
 ## Google Business Profile Optimization
 
-![](assets/images/uploads/6.png)
+![Blueprint for a complete Google Business Profile: setup, photos and social proof, and ongoing updates](assets/images/uploads/6.png)
 
 ### 6. Claim and Verify Your Google Business Profile
 
@@ -97,7 +98,7 @@ Google Business lets you publish posts (updates, offers, events). Businesses tha
 
 ## Technical SEO Basics
 
-![](assets/images/uploads/5.png)
+![Small business SEO cheat sheet covering on-page SEO, local SEO and technical SEO basics](assets/images/uploads/5.png)
 
 ### 11. Check Your Site Speed
 
@@ -133,7 +134,7 @@ NAP = Name, Address, Phone number. This must be identical across your website, G
 
 ## The SEO Priority Matrix
 
-![](assets/images/uploads/4.png)
+![SEO priority matrix for small businesses: immediate wins, strategic growth and ongoing tasks](assets/images/uploads/4.png)
 
 Not all fixes are equal. Here's where to focus first:
 

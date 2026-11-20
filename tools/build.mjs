@@ -35,10 +35,19 @@ for (const f of readdirSync(join(root, 'src/partials'))) {
 }
 
 // <!--@meta {"title": "...", "description": "...", "path": "/services/web-design", "crumbs": [["Services","/services"],["Web design"]], "noindex": false}-->
+// Search results show about 60 characters of a title, so the brand suffix shrinks or drops
+// when the page's own words need the room.
+function fitTitle(t) {
+    const base = t.replace(/ \| PoppyPages( Marketing)?$/, '');
+    if (base === t || t.length <= 60) return t;
+    for (const suffix of [' | PoppyPages Marketing', ' | PoppyPages']) if ((base + suffix).length <= 60) return base + suffix;
+    return base;
+}
+
 function metaTags(m) {
     const url = SITE + (m.path === '/' ? '/' : m.path);
     const out = [
-        `    <title>${esc(m.title)}</title>`,
+        `    <title>${esc(fitTitle(m.title))}</title>`,
         `    <meta name="description" content="${esc(m.description)}">`,
         `    <link rel="canonical" href="${url}">`,
         `    <meta name="theme-color" content="#1a0a25">`,
@@ -91,6 +100,48 @@ function pagePath(rel) {
     return clean === '/' ? '/' : clean.replace(/\/$/, '');
 }
 
+// ---------- images ----------
+// Reads the pixel size of a local PNG, JPEG or WebP, so every <img> gets width and height
+// (stops the page jumping as images load, which Google counts against Core Web Vitals).
+function imageSize(file) {
+    try {
+        const b = readFileSync(file);
+        if (b.readUInt32BE(0) === 0x89504e47) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+        if (b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+            const kind = b.toString('ascii', 12, 16);
+            if (kind === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+            if (kind === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+            if (kind === 'VP8L') { const n = b.readUInt32LE(21); return [1 + (n & 0x3fff), 1 + ((n >> 14) & 0x3fff)]; }
+        }
+        if (b[0] === 0xff && b[1] === 0xd8) {
+            let i = 2;
+            while (i < b.length) {
+                const m = b[i + 1], len = b.readUInt16BE(i + 2);
+                if (m >= 0xc0 && m <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(m)) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)];
+                i += 2 + len;
+            }
+        }
+    } catch { /* missing or unreadable: leave the tag as it is */ }
+    return null;
+}
+
+// Serves the light .webp copy of an uploaded PNG or JPEG when one sits next to it
+// (the originals stay for social previews), and adds width, height and lazy loading.
+function fixImages(html, { lazy = true } = {}) {
+    return html.replace(/<img\b([^>]*?)\s*\/?>/g, (tag, attrs) => {
+        const m = attrs.match(/\ssrc="(\/assets\/[^"]+)"/);
+        if (!m) return tag;
+        let src = m[1];
+        const webp = src.replace(/\.(png|jpe?g)$/i, '.webp');
+        if (webp !== src && existsSync(join(root, webp))) { attrs = attrs.replace(m[0], ` src="${webp}"`); src = webp; }
+        const size = imageSize(join(root, decodeURI(src)));
+        if (size && !/\swidth=/.test(attrs)) attrs += ` width="${size[0]}" height="${size[1]}"`;
+        if (lazy && !/\sloading=/.test(attrs)) attrs += ' loading="lazy"';
+        if (!/\sdecoding=/.test(attrs)) attrs += ' decoding="async"';
+        return `<img${attrs}>`;
+    });
+}
+
 // ---------- blog ----------
 function niceDate(d) {
     return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
@@ -118,17 +169,35 @@ function loadPosts() {
                 slug, title: String(data.title || slug), description: String(data.description || '').replace(/\s+/g, ' ').trim(),
                 date, updated, author, thumbnail: data.thumbnail ? String(data.thumbnail) : '',
                 schemaType: ['BlogPosting', 'Article', 'NewsArticle'].includes(data.schema_type) ? data.schema_type : 'BlogPosting',
+                service: SERVICES[data.service] ? data.service : '',
                 body, words: content.split(/\s+/).filter(Boolean).length
             };
         })
         .sort((a, b) => b.date - a.date);
 }
 
+// Each post links to the service it relates to (the "Related service" field in the CMS),
+// so readers and search engines can follow the post to the page that sells it.
+const SERVICES = {
+    'social-media-management': ['/services/social-media-management', 'Social media management', 'We plan, write and post your social content every week, and you approve it first.'],
+    'seo-and-content-strategy': ['/services/seo-and-content-strategy', 'SEO and AI search (AEO)', 'We make your business easy for Google and AI assistants to find, understand and recommend.'],
+    'web-design': ['/services/web-design', 'Website design', 'We build fast, clear websites that turn visitors into calls and bookings.'],
+    'pediatric-marketing': ['/services/pediatric-marketing', 'Marketing for pediatric practices', 'Social posts, review replies and reports built for pediatric and healthcare practices.'],
+    'all': ['/services', 'Marketing systems', 'Social content, Google reviews, AI search and automations that run every day for your business.']
+};
+function relatedService(p) {
+    const [path, name, line] = SERVICES[p.service] || SERVICES['all'];
+    return `                    <aside class="post-related" aria-label="Related service">
+                        <p class="label">Want this done for you?</p>
+                        <p><a href="${path}"><strong>${esc(name)}</strong></a>: ${esc(line)} <a class="text-link" href="/contact">Book a free strategy call</a></p>
+                    </aside>`;
+}
+
 function postCard(p, lead) {
     const img = p.thumbnail
         ? `<div class="thumb"><img src="${esc(assetUrl(p.thumbnail))}" alt="" loading="${lead ? 'eager' : 'lazy'}" decoding="async"></div>`
         : '<div class="thumb is-empty"></div>';
-    return `                    <a class="post-card${lead ? ' is-lead' : ''}" href="/blog/${p.slug}">
+    return fixImages(`                    <a class="post-card${lead ? ' is-lead' : ''}" href="/blog/${p.slug}">
                         ${img}
                         <div class="body">
                             <time datetime="${isoDay(p.date)}">${niceDate(p.date)}</time>
@@ -136,7 +205,7 @@ function postCard(p, lead) {
                             ${p.description ? `<p>${esc(p.description)}</p>` : ''}
                             <span class="text-link">Read the post</span>
                         </div>
-                    </a>`;
+                    </a>`);
 }
 
 function postPage(tpl, p, posts) {
@@ -177,8 +246,9 @@ ${others.map((o) => postCard(o, false)).join('\n')}
         'post-ld': ld(article),
         'post-title': esc(p.title),
         'post-byline': `By ${esc(p.author)} · Published <time datetime="${isoDay(p.date)}">${niceDate(p.date)}</time>${updatedLine}`,
-        'post-image': p.thumbnail ? `<img class="post-hero-img" src="${esc(assetUrl(p.thumbnail))}" alt="${esc(p.title)}" width="1200" height="630" decoding="async">` : '',
-        'post-body': p.body,
+        'post-image': p.thumbnail ? fixImages(`<img class="post-hero-img" src="${esc(assetUrl(p.thumbnail))}" alt="${esc(p.title)}" fetchpriority="high">`, { lazy: false }) : '',
+        'post-body': fixImages(p.body),
+        'post-related': relatedService(p),
         'post-more': more
     });
     return out;

@@ -4,6 +4,7 @@ title: The Complete Guide to Building a Brand That Gets Clients in 2026
 date: 2026-02-16T17:16:00.000-05:00
 author: PoppyPages
 thumbnail: assets/images/uploads/gemini_generated_image_f958egf958egf958.png
+service: social-media-management
 description: Your brand is not your logo. It's not your color palette. It's not
   even your website.
 schema_type: BlogPosting

@@ -19,7 +19,8 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Author", name: "author", widget: "string", default: "PoppyPages Team"}
       - {label: "Featured Image", name: "thumbnail", widget: "image"}
-      - {label: "Excerpt", name: "description", widget: "text", hint: "Short summary for search engines and social media"}
+      - {label: "Excerpt", name: "description", widget: "text", hint: "Short summary for search engines and social media. Keep it under 160 characters."}
+      - {label: "Related service", name: "service", widget: "select", options: ["social-media-management", "seo-and-content-strategy", "web-design", "pediatric-marketing", "all"], default: "all", required: false, hint: "The service page this post links to at the end"}
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "LLM Summary", name: "llm_summary", widget: "text", hint: "A concise summary optimized for AI models to understand the key takeaways", required: false}
       - {label: "Schema Type", name: "schema_type", widget: "select", options: ["BlogPosting", "Article", "NewsArticle"], default: "BlogPosting"}

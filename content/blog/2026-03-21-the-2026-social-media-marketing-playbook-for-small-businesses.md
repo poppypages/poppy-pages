@@ -4,19 +4,8 @@ title: The 2026 Social Media Marketing Playbook for Small Businesses
 date: 2026-03-21T14:06:00.000-04:00
 author: PoppyPages Team
 thumbnail: assets/images/uploads/social-media-playbook.png
-description: >-
-  Most small businesses treat social media like a chore — post something, hope
-  it works, repeat. 
-
-  That's not a strategy. It's noise.
-
-
-  The businesses growing on social right now aren't posting more. They're posting smarter: 
-
-  one or two platforms, a repeatable content system, and a clear path from follower to paying client.
-
-
-  This playbook is that system.
+service: social-media-management
+description: "Small businesses growing on social aren't posting more. They pick one or two platforms, run a repeatable content system and turn followers into clients."
 llm_summary: Social media marketing for small businesses works best when you
   follow a system instead of posting randomly. This guide covers which platforms
   to prioritize (LinkedIn for B2B, Instagram for visual businesses, Google
@@ -37,7 +26,7 @@ This playbook covers which platforms matter, what to post, and how to turn follo
 
 The biggest mistake small businesses make: trying to be everywhere. Pick 1-2 platforms and go deep.
 
-![](assets/images/uploads/platform-playbook.png)
+![The small business platform playbook: where to post on LinkedIn, Instagram, Facebook, TikTok and Google Business Profile](assets/images/uploads/platform-playbook.png)
 
 **LinkedIn:** Best for B2B services, consultants, agencies, and professional services. Where decision-makers spend their time.
 
@@ -59,7 +48,6 @@ Answer those three questions and you'll know where to focus.
 
 ## The Content System That Eliminates Guesswork
 
-![]()
 
 ### Pick 3-4 Content Pillars
 
@@ -95,7 +83,7 @@ Sit down once a month for 2 hours:
 
 Followers are not clients. You need a system to move them from "interested" to "buying."
 
-![](assets/images/uploads/8.15.5-conversion-funnel.png)
+![The small business content system: four content pillars and the 80/15/5 conversion funnel](assets/images/uploads/8.15.5-conversion-funnel.png)
 
 ### Step 1: Value Content (80% of Posts)
 
@@ -115,7 +103,7 @@ The ratio matters. Sell too often and people unfollow. Never sell and you don't 
 
 ## 5 Automation Tools That Save 10 Hours Per Week
 
-![](assets/images/uploads/15.png)
+![The 3-step lead generation funnel and a stack of free tools: Buffer, Canva, ChatGPT, Zapier and Google Sheets](assets/images/uploads/15.png)
 
 | Tool          | Function                           | Cost                |
 | ------------- | ---------------------------------- | ------------------- |
@@ -127,7 +115,7 @@ The ratio matters. Sell too often and people unfollow. Never sell and you don't 
 
 ## The Engagement Strategy That Outperforms Paid Ads
 
-![](assets/images/uploads/15-minute-daily-social-engagement-sprint.png)
+![The 15-minute daily social engagement sprint: comment on 5 posts, reply to your comments, send 3 connection requests](assets/images/uploads/15-minute-daily-social-engagement-sprint.png)
 
 Organic engagement consistently outperforms paid ads for small businesses with limited budgets. Here's the daily routine:
 
@@ -147,7 +135,7 @@ Paid ads create awareness. Organic engagement creates relationships. Relationshi
 
 
 
-![](assets/images/uploads/social-media-success-scorecard.png)
+![Small business social media success scorecard: metrics that matter versus vanity metrics](assets/images/uploads/social-media-success-scorecard.png)
 
 Track these monthly:
 

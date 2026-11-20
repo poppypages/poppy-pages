@@ -592,7 +592,7 @@ h2 em, h1 em, .hl { font-style: normal; background: var(--grad-petal); -webkit-b
 .foot-brand { display: grid; gap: 18px; justify-items: start; }
 .foot-brand p { color: var(--muted); max-width: 40ch; }
 .foot-col { display: grid; gap: 11px; align-content: start; }
-.foot-col h4 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+.foot-col h2, .foot-col h4 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
 .foot-col a { color: var(--muted); transition: color 0.2s, padding 0.3s var(--ease); width: fit-content; }
 .foot-col a:hover { color: var(--amber); padding-left: 4px; }
 .foot-base { margin-top: clamp(36px, 5vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-size: 0.86rem; color: var(--dim); }
@@ -630,7 +630,7 @@ h2 em, h1 em, .hl { font-style: normal; background: var(--grad-petal); -webkit-b
 @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } }
 .info-list { display: grid; gap: 14px; }
 .info-list > div { padding: 22px 24px; border-radius: var(--r-m); border: 1px solid var(--line); background: rgba(255, 255, 255, 0.035); display: grid; gap: 6px; }
-.info-list h3 { font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); }
+.info-list h2, .info-list h3 { line-height: 1.15;  font-family: var(--font-label); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); }
 .info-list a { font-weight: 700; font-size: 1.15rem; border-bottom: 1.5px solid var(--line-strong); width: fit-content; }
 .info-list p { color: var(--muted); }
 
@@ -797,6 +797,9 @@ body > footer:not(.site-footer) { border-top: 1px solid var(--line); padding: 48
 .post-body { font-size: 1.14rem; line-height: 1.75; color: var(--muted); }
 .post-body h2, .post-body h3 { color: var(--text); margin: 44px 0 16px; }
 .post-body p { margin-bottom: 22px; }
+.post-related { margin: 8px 0 28px; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--r-m); background: rgba(255, 255, 255, 0.035); }
+.post-related .label { margin-bottom: 8px; }
+.post-related p:last-child { color: var(--muted); }
 .post-body ul, .post-body ol { margin: 18px 0 26px 22px; }
 .post-body li { margin-bottom: 10px; }
 .post-body a { color: var(--amber); text-decoration: underline; }
